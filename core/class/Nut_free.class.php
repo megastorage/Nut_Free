@@ -97,6 +97,7 @@ class Nut_free extends eqLogic {
 			'name' =>'Tension de la batterie',
 			'logicalId'=>'batt_volt',
 			'cmd'=>'battery.voltage',
+			'subtype'=>'string',
 			'unite'=>'V',
 		),
 		array(
@@ -225,15 +226,6 @@ class Nut_free extends eqLogic {
 		}
 		$_version = jeedom::versionAlias($_version);
 		
-		
-		$cmd = $this->getCmd(null,'cnx_ssh');
-		$replace['#cnx_ssh#'] = (is_object($cmd)) ? $cmd->execCmd() : '';
-		$replace['#cnx_sshid#'] = is_object($cmd) ? $cmd->getId() : '';
-		
-		$cmd = $this->getCmd(null,'ssh_op');
-		$replace['#ssh_op#'] = (is_object($cmd)) ? $cmd->execCmd() : '';
-		$replace['#ssh_opid#'] = is_object($cmd) ? $cmd->getId() : '';
-		
 		foreach(self::$_infosMap as $idx=>$info)
 		{
 			$cmd = $this->getCmd(null,$info['logicalId']);
@@ -241,6 +233,7 @@ class Nut_free extends eqLogic {
 			$replace['#'.$info['logicalId'].'id#'] = is_object($cmd) ? $cmd->getId() : '';
 			$replace['#'.$info['logicalId'].'_display#'] = (is_object($cmd) && $cmd->getIsVisible()) ? '#'.$info['logicalId'].'_display#' : "none";
 		}
+		
 		
 		//('action')
 		foreach ($this->getCmd('action') as $cmd) {
@@ -337,8 +330,30 @@ class Nut_free extends eqLogic {
 					
 					$resultoutput = ssh2_exec($sshconnection, $cmdline); 
 					stream_set_blocking($resultoutput, true);
+					stream_set_blocking($errorStream, true);
 					$result =stream_get_contents($resultoutput);
+					$errorStream = ssh2_fetch_stream($resultoutput, SSH2_STREAM_STDERR);
+					$errorresult = stream_get_contents($errorStream);
 					fclose($resultoutput);
+				}
+				/*Affichage sur une ligne Marque / Model*/
+				if ($idx==0){
+					$Marque = $result;
+				}
+				if ($idx==1){
+					$result = $Marque.' '.$result;
+				}
+				/*Log pour debug */
+				if (empty($errorresult)){
+					log::add('Nut_free', 'debug', $equipement.' UPS '.$info['name'].' : '. $result);
+				}else{
+					log::add('Nut_free', 'debug', $equipement.' UPS '.$info['name'].' : '.$errorresult);
+					
+					/*Désactivation de la commande si retour d'erreur*/
+					$cmd = $this->getCmd(null,$info['logicalId']);
+					$cmd->setIsVisible(0);
+					$cmd->setEqLogic_id($this->getId());
+					$cmd->save();
 				}
 				
 				//met a jour l'info ds jeedom
@@ -349,7 +364,8 @@ class Nut_free extends eqLogic {
 				}
 				
 			}
-			log::add('Nut_free', 'debug', $equipement.' UPS '.$info['name'].' : '. $result);
+			
+			
 		}
 		log::add('Nut_free', 'debug',' -----------------------------------------------------' );
 	
