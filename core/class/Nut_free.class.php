@@ -323,8 +323,14 @@ class Nut_free extends eqLogic {
 			{
 				if ($ssh_op == '0')
 				{
-					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." > /dev/stdout 2> /dev/null";
+					$errorresult="";
+					/* 2>&1 permet de recuperer l'erreur et la traiter */
+					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1";
 					$result = exec($cmdline);
+					if (strstr($result,'not supported by UPS')){
+						$errorresult=$result;
+					}
+
 				}else{
 					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd'];
 					
@@ -344,7 +350,7 @@ class Nut_free extends eqLogic {
 					$result = $Marque.' '.$result;
 				}
 				/*Log pour debug */
-				if (empty($errorresult)){
+				if (!strstr($errorresult,'not supported by UPS')){
 					log::add('Nut_free', 'debug', $equipement.' UPS '.$info['name'].' : '. $result);
 				}else{
 					log::add('Nut_free', 'debug', $equipement.' UPS '.$info['name'].' : '.$errorresult);
@@ -364,8 +370,7 @@ class Nut_free extends eqLogic {
 				}
 				
 			}
-			
-			
+
 		}
 		log::add('Nut_free', 'debug',' -----------------------------------------------------' );
 	
