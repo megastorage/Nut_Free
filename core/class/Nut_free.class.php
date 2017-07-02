@@ -19,9 +19,7 @@
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
-
-
-						
+					
 class Nut_free extends eqLogic {
 	
 	public static $_infosMap = array(
@@ -142,6 +140,7 @@ class Nut_free extends eqLogic {
 		}
 	}
 
+	
 	public static function dependancy_info() {
 		$return = array();
 		$return['log'] = 'Nut_free_update';
@@ -206,7 +205,7 @@ class Nut_free extends eqLogic {
 			$this->getInformations();
 	}
 	
-
+/*
 	public static $_widgetPossibility = array('custom' => array(
       'visibility' => true,
       'displayName' => true,
@@ -218,13 +217,15 @@ class Nut_free extends eqLogic {
       'border-radius' => true,
       'background-opacity' => true,
 	));
-
+*/
  	public function toHtml($_version = 'dashboard')	{
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
 			return $replace;
 		}
-		$_version = jeedom::versionAlias($_version);
+		$version = jeedom::versionAlias($_version);
+		$cmd_html = '';
+		$br_before = 0;
 		
 		foreach(self::$_infosMap as $idx=>$info)
 		{
@@ -233,19 +234,64 @@ class Nut_free extends eqLogic {
 			$replace['#'.$info['logicalId'].'id#'] = is_object($cmd) ? $cmd->getId() : '';
 			$replace['#'.$info['logicalId'].'_display#'] = (is_object($cmd) && $cmd->getIsVisible()) ? '#'.$info['logicalId'].'_display#' : "none";
 		}
+		////////////////////////////////////////////////////////////////////
+		foreach ($this->getCmd(null, null, true) as $cmd) {
+			if (isset($replace['#refresh_id#']) && $cmd->getId() == $replace['#refresh_id#']) {
+				continue;
+			}
+			if ($br_before == 0 && $cmd->getDisplay('forceReturnLineBefore', 0) == 1) {
+				$cmd_html .= '<br/>';
+			}
+			$cmd_html .= $cmd->toHtml($_version, '', $replace['#cmd-background-color#']);
+			$br_before = 0;
+			if ($cmd->getDisplay('forceReturnLineAfter', 0) == 1) {
+				$cmd_html .= '<br/>';
+				$br_before = 1;
+			}
+		}
 		
 		
+		///////////////////////////////////////////////////////////////////
+		/*
+		/////////////////////////////////////////////////////////////
 		//('action')
 		foreach ($this->getCmd('action') as $cmd) {
 			$replace['#cmd_' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
 		}
-
-		$html = template_replace($replace, getTemplate('core', $_version, 'Nut_free','Nut_free'));
-		cache::set('Nut_freeWidget' . $_version . $this->getId(), $html, 0);
+		////////////////////////////////////////////////////////////////
+		*/
+		$html = template_replace($replace, getTemplate('core', $version, 'Nut_free','Nut_free'));
+		//cache::set('Nut_freeWidget' . $_version . $this->getId(), $html, 0);
 		
 		return $html;
 	}
-
+	/*
+	public function toHtml($_version = 'dashboard') {
+		$replace = $this->preToHtml($_version);
+		if (!is_array($replace)) {
+			return $replace;
+		}
+		$version = jeedom::versionAlias($_version);
+		$cmd_html = '';
+		$br_before = 0;
+		foreach ($this->getCmd(null, null, true) as $cmd) {
+			if (isset($replace['#refresh_id#']) && $cmd->getId() == $replace['#refresh_id#']) {
+				continue;
+			}
+			if ($br_before == 0 && $cmd->getDisplay('forceReturnLineBefore', 0) == 1) {
+				$cmd_html .= '<br/>';
+			}
+			$cmd_html .= $cmd->toHtml($_version, '', $replace['#cmd-background-color#']);
+			$br_before = 0;
+			if ($cmd->getDisplay('forceReturnLineAfter', 0) == 1) {
+				$cmd_html .= '<br/>';
+				$br_before = 1;
+			}
+		}
+		$replace['#cmd#'] = $cmd_html;
+		return template_replace($replace, getTemplate('core', $version, 'worxLandroid', 'worxLandroid'));
+	}
+	*/
    public function getInformations() {
 		
 		//ici tu pourrais sortir direcetement si l'eqp n'est pas actif -> 
