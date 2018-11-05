@@ -50,6 +50,12 @@ class Nut_free extends eqLogic {
 			'cmd'=>'device.model',
 		),
 		array(
+			'name' =>'Numero de Série',
+			'logicalId'=>'ups_serial',
+			'cmd' => 'ups.serial',
+			'subtype'=>'string',
+		),
+		array(
 			'name' =>'UPS MODE',
 			'logicalId'=>'ups_line',
 			'cmd' => 'ups.status',
