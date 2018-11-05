@@ -1,4 +1,4 @@
-﻿<?php
+l﻿<?php
 
 /* This file is part of Jeedom.
  *
@@ -50,7 +50,7 @@ class Nut_free extends eqLogic {
 			'cmd'=>'device.model',
 		),
 		array(
-			'name' =>'Numero de Série',
+			'name' =>'Serial',
 			'logicalId'=>'ups_serial',
 			'cmd' => 'ups.serial',
 			'subtype'=>'string',
