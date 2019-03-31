@@ -377,18 +377,18 @@ class Nut_free extends eqLogic {
 				{
 					$errorresult="";
 					/* 2>&1 permet de recuperer l'erreur et la traiter */
-					//$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1";
+					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1";
 					//test Suite probleme de Init SSL en local pour certains sur Pi0
-					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." > /dev/stdout 2> /dev/null";
+					//$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." > /dev/stdout 2> /dev/null";
 					$result = exec($cmdline);
 					if (strstr($result,'not supported by UPS')){
 						$errorresult=$result;
 					}
 
 				}else{
-					//$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd'];
+					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd'];
 					//test Suite probleme de Init SSL en local pour certains sur Pi0
-					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." > /dev/stdout 2> /dev/null";
+					//$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." > /dev/stdout 2> /dev/null";
 					
 					$resultoutput = ssh2_exec($sshconnection, $cmdline); 
 					stream_set_blocking($resultoutput, true);
