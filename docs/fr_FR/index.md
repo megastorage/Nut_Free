@@ -24,8 +24,7 @@ FAQ
 include::faq.asciidoc[]
 
 
-Changelog
+[Changelog](changelog.md)
 ===
 
-[include](changelog.md)
 
