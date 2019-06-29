@@ -15,7 +15,7 @@ Données visibles sur le Dashboard :
 Configuration
 ===
 
-[include](File:configuration.asciidoc)
+[include](File:configuration.md)
 
 
 FAQ
@@ -27,5 +27,5 @@ include::faq.asciidoc[]
 Changelog
 ===
 
-[include](https://megastorage.github.io/nut_free/fr_FR/changelog.html)
+[include](changelog.md)
 
