@@ -1,6 +1,6 @@
 ## Présentation ##
 
-Ce plugin permet de récupérer des données système et de les afficher sur le Dashboard.
+Ce plugin permet de récupérer des données d'un onduleur via un serveur Nut et de les afficher sur le Dashboard.
 
 
 ## Configuration ##
