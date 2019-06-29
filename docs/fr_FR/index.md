@@ -27,5 +27,5 @@ include::faq.asciidoc[]
 Changelog
 ===
 
-[include](File:changelog.md)
+[include](changelog.md)
 
