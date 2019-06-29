@@ -15,7 +15,7 @@ Données visibles sur le Dashboard :
 Configuration
 ===
 
-[include] (File:configuration.asciidoc)
+[include](File:configuration.asciidoc)
 
 
 FAQ
@@ -27,5 +27,5 @@ include::faq.asciidoc[]
 Changelog
 ===
 
-[include] :changelog.md
+[include]::changelog.md
 
