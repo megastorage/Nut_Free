@@ -1,4 +1,4 @@
-﻿Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur *Plugins  / Monitoring / Nut_free*
+Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur *Plugins  / Monitoring / Nut_free*
 
 Puis cliquer sur le bouton en haut à gauche *Ajouter*
 
