@@ -8,5 +8,6 @@
 	"category" : "monitoring",
 	"hasDependency" : true,
 	"language" : ["fr_FR"],
+	"documentation": "https://megastorage.github.io/nut_free/",
 	"compatibility" : ["miniplus","smart","rpi","docker","diy"]
 }
