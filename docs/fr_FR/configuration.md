@@ -16,7 +16,7 @@ Puis définir :
 - Activer (à cocher, sinon l'équipement ne sera pas utilisable)
 - Visible (optionel si vous ne désirez pas le rendre visible sur le Dashboard)
 
-![Image 3](../images/nut_free_3.png)
+![Image 3](../images/Nut_free_3.png)
 
 
 
@@ -28,16 +28,16 @@ Nom de la configuration UPS:: Nom de l'onduleur a surveillé vu par NUT ( Résul
 							 
 Auto detectetion de l'UPS:
 
-![Image 3_2](../images/nut_free_3_2.png)
+![Image 3_2](../images/Nut_free_3_2.png)
 
 Si il y a seulement 1 onduleur sur le serveur Nut, laisser sur oui.
 sinon mettre sur non et renseigner l'onduleur à surveiller.
 
-![Image 3_3](../images/nut_free_3_3.png)
+![Image 3_3](../images/Nut_free_3_3.png)
 
 le type de connexion au serveur NUT:
 
-![Image 4](../images/nut_free_4.png)
+![Image 4](../images/Nut_free_4.png)
  
 [horizontal]
 === Non
@@ -52,7 +52,7 @@ Pour un NAS Synology:
 - il faut autoriser l'IP du jeedom à récupérer les info de l'onduleur. 
 Aller dans le "Panneau de configuration" => "Matériel et alimentation" => "UPS" => "Périphériques DiskStation autorisés"
 
-![Image 6](../images/nut_free_6.png)
+![Image 6](../images/Nut_free_6.png)
 
 [horizontal]
 === Oui
@@ -64,7 +64,7 @@ Port SSH:: saisir le numéro du port SSH (par défaut il s'agit du port 22)
 Identifiant:: saisir le nom d'utilisateur qui sera utilisé pour lancer les commandes Linux
 Mot de passe:: saisir le mot de passe qui est associé au nom d'utilisateur
 
-![Image 5](../images/nut_free_5.png)
+![Image 5](../images/Nut_free_5.png)
 [horizontal]
 [IMPORTANT]
 Vous devez choisir un identifiant avec les droits nécessaires pour lancer les commandes (en général le login "root").
@@ -74,7 +74,7 @@ Pour un NAS Synology:
 - il faut autoriser l'IP du jeedom à recuperer les info de l'onduleur. 
 Aller dans le "Panneau de configuration" => "Matériel et alimentation" => "UPS" => "Périphériques DiskStation autorisés"
 
-![Image 6](../images/nut_free_6.png)
+![Image 6](../images/Nut_free_6.png)
 
 [horizontal]
 === Historiser
@@ -82,4 +82,4 @@ Pour certaines valeurs, il est possible d'activer "historiser" pour représenter
 
 === Quelques captures
 
-![Image 7](../images/nut_free_7.png)
+![Image 7](../images/Nut_free_7.png)
