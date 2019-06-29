@@ -1,30 +1,18 @@
- Nut_free
- ===
+## Présentation ##
 
-Présentation
 Ce plugin permet de récupérer des données système et de les afficher sur le Dashboard.
 
 
-Compatibilité :
-===
-
-Données visibles sur le Dashboard :
-[horizontal]
+## Configuration ##
+[Link](File:configuration.md)
 
 
-Configuration
-===
-
-[include](File:configuration.md)
-
-
-FAQ
-===
-
+## FAQ ##
 include::faq.asciidoc[]
 
 
-[Changelog](changelog.md)
-===
+## Changelog ##
+[Link](changelog.md)
+
 
 
