@@ -7,7 +7,7 @@ Puis cliquer sur le bouton en haut à gauche *Ajouter*
 
 Puis saisir le nom de l'équipement (ex. Onduleur_Nas) 
 
-[img src=../images/nut_free_2.png] [align="center"]
+<img src="../images/nut_free_2.png"> [align="center"]
 
 Puis définir :
 
