@@ -2,12 +2,12 @@ Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur *P
 
 Puis cliquer sur le bouton en haut à gauche *Ajouter*
 
-![Image 1](../images/nut_free_1.png)
+![Image 1](../images/Nut_free_1.png)
 
 
 Puis saisir le nom de l'équipement (ex. Onduleur_Nas) 
 
-![Image 2](../images/nut_free_2.png)
+![Image 2](../images/Nut_free_2.png)
 
 Puis définir :
 
