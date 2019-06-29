@@ -10,8 +10,9 @@ Modification des textes
 Ajout ups.timer.shutdown
 Changement des icônes
  
- 0.22:
- ===
+0.22:
+===
+ 
 Ajout ups.status
 Changement des icônes
 
