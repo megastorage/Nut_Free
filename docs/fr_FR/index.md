@@ -11,17 +11,21 @@ Compatibilité :
 Données visibles sur le Dashboard :
 [horizontal]
 
-'''
+
 Configuration
+===
+
 [include] (File:configuration.asciidoc)
 
-'''
+
 FAQ
+===
+
 include::faq.asciidoc[]
 
 
-
-'''
 Changelog
+===
+
 include::changelog.asciidoc[]
 
