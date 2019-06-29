@@ -13,7 +13,7 @@ Données visibles sur le Dashboard :
 
 '''
 Configuration
-include::configuration.asciidoc[]
+[include] (File:configuration.asciidoc)
 
 '''
 FAQ
