@@ -40,7 +40,7 @@ le type de connexion au serveur NUT:
 ![Image 4](../images/Nut_free_4.png)
  
 
-**Non**
+**Non :**
 Sans connexion ssh.
 Dialogue direct avec le serveur nut via l'IP et le port de communincation standard de NUT
 
@@ -55,7 +55,7 @@ Aller dans le "Panneau de configuration" => "Matériel et alimentation" => "UPS"
 ![Image 6](../images/Nut_free_6.png)
 
 
-**Oui**
+**Oui :**
 Cela signifi avec connexion ssh. Dans ce ca renseigner:
 
 Aprés avoir sélectionné ce mode, 3 champs supplémentaires s'affichent :
@@ -65,8 +65,8 @@ Identifiant:: saisir le nom d'utilisateur qui sera utilisé pour lancer les comm
 Mot de passe:: saisir le mot de passe qui est associé au nom d'utilisateur
 
 ![Image 5](../images/Nut_free_5.png)
-[horizontal]
-[IMPORTANT]
+
+## IMPORTANT ##
 Vous devez choisir un identifiant avec les droits nécessaires pour lancer les commandes (en général le login "root").
 
 Pour un NAS Synology:
