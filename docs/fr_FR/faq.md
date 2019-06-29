@@ -1,4 +1,4 @@
-## Quelle est la fréquence de rafraichissement des informations ?## 
+## Quelle est la fréquence de rafraichissement des informations ? ## 
 Le plugin actualise les informations toutes les 1min (00, 15, 30 et 45).
 
 ## Faut-il renseigner la ligne "Nom de la configuration UPS"? ##
