@@ -8,7 +8,7 @@ Ce plugin permet de récupérer des données système et de les afficher sur le 
 
 
 ## FAQ ##
-![Link](faq.md)
+[Link](faq.md)
 
 
 ## Changelog ##
