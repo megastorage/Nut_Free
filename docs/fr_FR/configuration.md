@@ -54,7 +54,7 @@ Aller dans le "Panneau de configuration" => "Matériel et alimentation" => "UPS"
 
 ![Image 6](../images/Nut_free_6.png)
 
-[horizontal]
+
 === Oui
 Cela signifi avec connexion ssh. Dans ce ca renseigner:
 
@@ -76,10 +76,10 @@ Aller dans le "Panneau de configuration" => "Matériel et alimentation" => "UPS"
 
 ![Image 6](../images/Nut_free_6.png)
 
-[horizontal]
-=== Historiser
+
+## Historiser ##
 Pour certaines valeurs, il est possible d'activer "historiser" pour représenter, par une courbe, les variations de différentes valeurs.
 
-=== Quelques captures
+## Quelques captures ##
 
 ![Image 7](../images/Nut_free_7.png)
