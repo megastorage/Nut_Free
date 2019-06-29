@@ -4,11 +4,11 @@ Ce plugin permet de récupérer des données système et de les afficher sur le 
 
 
 ## Configuration ##
-[Link](File:configuration.md)
+[Link](configuration.md)
 
 
 ## FAQ ##
-include::faq.asciidoc[]
+[link](faq.md)
 
 
 ## Changelog ##
