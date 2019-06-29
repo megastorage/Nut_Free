@@ -1,25 +1,25 @@
-== Nut_free
+<H1> Nut_free
 
-== Présentation
+<H1> Présentation
 Ce plugin permet de récupérer des données système et de les afficher sur le Dashboard.
 
 
-== Compatibilité :
+<H1> Compatibilité :
 
-== Données visibles sur le Dashboard :
+<H1> Données visibles sur le Dashboard :
 [horizontal]
 
 '''
-== Configuration
+<H1> Configuration
 include::configuration.asciidoc[]
 
 '''
-== FAQ
+<H1> FAQ
 include::faq.asciidoc[]
 
 
 
 '''
-== Changelog
+<H1> Changelog
 include::changelog.asciidoc[]
 
