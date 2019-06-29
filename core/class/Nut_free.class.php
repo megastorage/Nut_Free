@@ -101,9 +101,14 @@ class Nut_free extends eqLogic {
 			'name' =>'Tension de la batterie',
 			'logicalId'=>'batt_volt',
 			'cmd'=>'battery.voltage',
-			'subtype'=>'string',
 			'unite'=>'V',
 		),
+		array(
+            'name'      => 'Température de la batterie',
+            'logicalId' => 'batt_temp',
+            'cmd'       => 'battery.temperature',
+            'unite'     => '°C',
+        ),
 		array(
 			'name' =>'Charge onduleur',
 			'logicalId'=>'ups_load',
@@ -121,6 +126,12 @@ class Nut_free extends eqLogic {
 			'logicalId'=>'timer_shutdown',
 			'cmd'=>'ups.timer.shutdown',
 			'unite'=>'s',
+		),
+		array(
+			'name' =>'Beeper',
+			'logicalId'=>'beeper_stat',
+			'subtype'=>'string',
+			'cmd'=>'ups.beeper.status',
 		),
 		array(
 			'name' =>'SSH OPTION',
@@ -184,9 +195,15 @@ class Nut_free extends eqLogic {
 				$Nut_freeCmd = new Nut_freeCmd();
 				$Nut_freeCmd->setLogicalId( $info['logicalId']);
 				$Nut_freeCmd->setName(__( $info['name'], __FILE__));
+					if(isset($info['unite'])){
+						$Nut_freeCmd->setUnite($info['unite']);
+				}
 				$Nut_freeCmd->setOrder($idx+1); //+1 car $idx commence a 0
+					
 				if(isset($info['template_dashboard'])) //on verifi si on a specifier une template, si oui on l'affecte, on peu creer une autre cle $info['template_mobile'] si bessoin
 					$Nut_freeCmd->setTemplate('dashboard', $info['template_dashboard']);
+					
+				
 			}
 			
 			$Nut_freeCmd->setType($params['type'] ?: 'info'); //ici comparaison unitaire, si le parametre est specifiÃ© on l'utilise sinon on met notre default
@@ -197,9 +214,7 @@ class Nut_free extends eqLogic {
 			}else{
 				$Nut_freeCmd->setSubType('numeric', $info['subtype']);
 			}
-			if(isset($info[unite])){
-				$Nut_freeCmd->setUnite($info['unite']);
-			}
+			
 			
 			if(isset($info['isVisible']))
 			$Nut_freeCmd->setIsVisible($params['isVisible']);
@@ -378,8 +393,6 @@ class Nut_free extends eqLogic {
 					$errorresult="";
 					/* 2>&1 permet de recuperer l'erreur et la traiter */
 					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1";
-					//test Suite probleme de Init SSL en local pour certains sur Pi0
-					//$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." > /dev/stdout 2> /dev/null";
 					$result = exec($cmdline);
 					if (strstr($result,'not supported by UPS')){
 						$errorresult=$result;
@@ -387,14 +400,13 @@ class Nut_free extends eqLogic {
 
 				}else{
 					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd'];
-					//test Suite probleme de Init SSL en local pour certains sur Pi0
-					//$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." > /dev/stdout 2> /dev/null";
 					
 					$resultoutput = ssh2_exec($sshconnection, $cmdline); 
 					stream_set_blocking($resultoutput, true);
-					stream_set_blocking($errorStream, true);
+					
 					$result =stream_get_contents($resultoutput);
 					$errorStream = ssh2_fetch_stream($resultoutput, SSH2_STREAM_STDERR);
+					stream_set_blocking($errorStream, true);
 					$errorresult = stream_get_contents($errorStream);
 					fclose($resultoutput);
 				}
@@ -432,13 +444,25 @@ class Nut_free extends eqLogic {
 	
 		
 		/*DEBUG général*/
-		if ($this->getIsEnable()){		
+		if ($this->getIsEnable()){
+			$conf_ssh= ' ' ;
+			$conf_ups= ' ' ;
+			if($ssh_op == 1){
+				$conf_ssh = " SSH ";
+			}else{
+				$conf_ssh = " Non SSH ";	
+			}
+			if($ups_auto == 1){
+				$conf_ups = " Manuel ";
+			}else{
+				$conf_ups = " Auto ";	
+			}
 			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
 			log::add('Nut_free', 'debug', $equipement.' UPS auto select: ' . $UPS_auto_select );
 			log::add('Nut_free', 'debug', $equipement.' UPS configured: ' . $ups_debug );
-			log::add('Nut_free', 'debug', $equipement.' UPS auto detect: '. $ups_auto);
+			log::add('Nut_free', 'debug', $equipement.' UPS auto detect: '. $conf_ups. $ups_auto);
 			log::add('Nut_free', 'debug', $equipement.' UPS commande pour auto_detect: '. $upscmd);
-			log::add('Nut_free', 'debug', $equipement.' UPS Connexion type: '. $ssh_op);
+			log::add('Nut_free', 'debug', $equipement.' UPS Connexion type: '. $conf_ssh. $ssh_op);
 			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
 		}				
 		
