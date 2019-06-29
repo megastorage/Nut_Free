@@ -2,7 +2,7 @@ Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur *P
 
 Puis cliquer sur le bouton en haut à gauche *Ajouter*
 
-[(../images/nut_free_1.png)][align="center"]
+<img src="../images/nut_free_1.png">][align="center"]
 
 
 Puis saisir le nom de l'équipement (ex. Onduleur_Nas) 
