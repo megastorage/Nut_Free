@@ -9,7 +9,7 @@ Puis saisir le nom de l'équipement (ex. Onduleur_Nas)
 
 ![Image 2](../images/Nut_free_2.png)
 
-Puis définir :
+**Puis définir :**
 
 - Objet parent
 - Catégorie (optionnelle)
@@ -20,13 +20,13 @@ Puis définir :
 
 
 
-Adresse IP:: IP du serveur NUT distant
+**Adresse IP:** IP du serveur NUT distant
 Nom de la configuration UPS:: Nom de l'onduleur a surveillé vu par NUT ( Résultat de la commande upsc -l).
 							 - Si il y a 1 seul onduleur sur le serveur NUT et que la connexion ne se fait pas par ssh, laisser le champs vide.
 							  Le plugin trouvera seul le nom.
 							 - Si il y a plusieurs onduleur, il faudra connaitre le nom et le renseigner.
 							 
-Auto detectetion de l'UPS:
+**Auto detectetion de l'UPS:**
 
 ![Image 3_2](../images/Nut_free_3_2.png)
 
