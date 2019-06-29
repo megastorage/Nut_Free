@@ -27,5 +27,5 @@ include::faq.asciidoc[]
 Changelog
 ===
 
-[include](changelog.md)
+[include](https://megastorage.github.io/nut_free/fr_FR/changelog.html)
 
