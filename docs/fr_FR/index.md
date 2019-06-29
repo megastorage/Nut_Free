@@ -8,7 +8,7 @@ Ce plugin permet de récupérer des données d'un onduleur via un serveur Nut et
 
 
 ## FAQ ##
-[Link](faq.md)
+[Link] `<faq.md>`
 
 
 ## Changelog ##
