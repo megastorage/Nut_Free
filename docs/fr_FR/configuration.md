@@ -59,10 +59,10 @@ Aller dans le "Panneau de configuration" => "Matériel et alimentation" => "UPS"
 Cela signifi avec connexion ssh. Dans ce ca renseigner:
 
 Aprés avoir sélectionné ce mode, 3 champs supplémentaires s'affichent :
-[horizontal]
-Port SSH:: saisir le numéro du port SSH (par défaut il s'agit du port 22)
-Identifiant:: saisir le nom d'utilisateur qui sera utilisé pour lancer les commandes Linux
-Mot de passe:: saisir le mot de passe qui est associé au nom d'utilisateur
+
+-**Port SSH:** saisir le numéro du port SSH (par défaut il s'agit du port 22)
+-**Identifiant:** saisir le nom d'utilisateur qui sera utilisé pour lancer les commandes Linux
+-**Mot de passe:** saisir le mot de passe qui est associé au nom d'utilisateur
 
 ![Image 5](../images/Nut_free_5.png)
 
