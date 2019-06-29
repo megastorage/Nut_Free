@@ -21,7 +21,8 @@ Puis saisir le nom de l'équipement (ex. Onduleur_Nas)
 
 
 **Adresse IP:** IP du serveur NUT distant
-**Nom de la configuration UPS:**:Nom de l'onduleur a surveillé vu par NUT ( Résultat de la commande upsc -l).
+
+**Nom de la configuration UPS:** Nom de l'onduleur a surveillé vu par NUT ( Résultat de la commande upsc -l).
 - Si il y a 1 seul onduleur sur le serveur NUT, l'est pas utile de renseigner le champs.Le plugin trouvera seul le nom.
 - Si il y a plusieurs onduleur, il faudra connaitre le nom et le renseigner.
 							 
