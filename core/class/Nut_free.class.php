@@ -486,8 +486,6 @@ class Nut_free extends eqLogic {
 				if (!ssh2_auth_password($connection,$user,$pass)){
 				log::add('Nut_free', 'error', 'Authentification SSH KO pour '.$equipement);
 				$cnx_ssh = 'KO';
-				}else{
-					
 				}
 			}
 	}
