@@ -1,3 +1,6 @@
+## 0.31: ##
+19/10/2019 Modification pour la V4
+
 ## 0.30: ##
 Ajout température
 Modification de la doc
