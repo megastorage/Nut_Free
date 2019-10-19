@@ -23,7 +23,7 @@
 				
 				$('#iconUPS_line#id#').append('<i title="Sur secteur" class="techno techno-plug2 tooltips" style="font-size : 1.1em;color: #00FF00;" ></i>');
 			} 
-			else if ('#ups_line#' == 'OB DISCHRG') {
+			else if ('#ups_line#'.search('DISCHRG')>-1) {
 				
 				$('#iconUPS_line#id#').append('<i title="Sur batterie " class="techno techno-low2 tooltips" style="font-size : 1.1em;color: #FEB95E;" ></i>');
 			} 
