@@ -1,3 +1,6 @@
+## 0.32: ##
+02/02/2020 Correction warning PHP
+
 ## 0.31: ##
 19/10/2019 Modification pour la V4
 
