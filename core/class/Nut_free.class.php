@@ -244,7 +244,7 @@ class Nut_free extends eqLogic {
 		if (!is_array($replace)) {
 			return $replace;
 		}
-		$_version = jeedom::versionAlias($_version);
+		$version = jeedom::versionAlias($_version);
 		$cmd_html = '';
 		$br_before = 0;
 		
@@ -263,9 +263,7 @@ class Nut_free extends eqLogic {
 			if ($br_before == 0 && $cmd->getDisplay('forceReturnLineBefore', 0) == 1) {
 				$cmd_html .= '<br/>';
 			}
-			if (isset($replace['#cmd-background-color#']) {
-			$cmd_html .= $cmd->toHtml($_version, '', $replace['#background-color#']);
-			}	
+			$cmd_html .= $cmd->toHtml($_version, '', $replace['#cmd-background-color#']);
 			$br_before = 0;
 			if ($cmd->getDisplay('forceReturnLineAfter', 0) == 1) {
 				$cmd_html .= '<br/>';
@@ -283,7 +281,7 @@ class Nut_free extends eqLogic {
 		}
 		////////////////////////////////////////////////////////////////
 		*/
-		$html = template_replace($replace, getTemplate('core', $_version, 'Nut_free','Nut_free'));
+		$html = template_replace($replace, getTemplate('core', $version, 'Nut_free','Nut_free'));
 		//cache::set('Nut_freeWidget' . $_version . $this->getId(), $html, 0);
 		
 		return $html;
