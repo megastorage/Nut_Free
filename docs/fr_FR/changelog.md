@@ -1,3 +1,6 @@
+## 0.33: ##
+04/02/2020 Ajout temps en minutes pour batt_runtime et timer_shutdown
+
 ## 0.32: ##
 02/02/2020 Correction warning PHP
 
