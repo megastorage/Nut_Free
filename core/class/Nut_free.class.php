@@ -116,16 +116,28 @@ class Nut_free extends eqLogic {
 			'unite'=>'%',
 		),
 		array(
-			'name' =>'Temps restant sur batterie',
+			'name' =>'Temps restant sur batterie en s',
 			'logicalId'=>'batt_runtime',
 			'cmd'=>'battery.runtime',
 			'unite'=>'s',
 		),
+     	 array(
+			'name' =>'Temps restant sur batterie en min',
+			'logicalId'=>'batt_runtime_min',
+			'cmd'=>'battery.runtime',
+			'unite'=>'s',
+		),
 		array(
-			'name' =>'Temps restant avant arrêt',
+			'name' =>'Temps restant avant arrêt en s',
 			'logicalId'=>'timer_shutdown',
 			'cmd'=>'ups.timer.shutdown',
 			'unite'=>'s',
+		),
+      	array(
+			'name' =>'Temps restant avant arrêt en min',
+			'logicalId'=>'timer_shutdown_min',
+			'cmd'=>'ups.timer.shutdown',
+			'unite'=>'min',
 		),
 		array(
 			'name' =>'Beeper',
@@ -412,6 +424,7 @@ class Nut_free extends eqLogic {
 					$errorresult = stream_get_contents($errorStream);
 					fclose($resultoutput);
 				}
+              
 				/*Affichage sur une ligne Marque / Model*/
 				if ($idx==0){
 					$Marque = $result;
@@ -419,6 +432,11 @@ class Nut_free extends eqLogic {
 				if ($idx==1){
 					$result = $Marque.' '.$result;
 				}
+              
+             	/*Affiche en minutes*/
+            	if($idx==14 || $idx==14){
+                $result = (int)($result/60);
+                }
 				/*Log pour debug */
 				if (!strstr($errorresult,'not supported by UPS')){
 					log::add('Nut_free', 'debug', $equipement.' UPS '.$info['name'].' : '. $result);
