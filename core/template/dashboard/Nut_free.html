@@ -143,7 +143,7 @@
 		}
     </script>
 	<div class="tooltips"  data-cmd_id="#batt_runtimeid#" style="margin-left:5px;display: #batt_runtime_display#;">
-			<span title="Temps restant sur batterie (batt_runtime)" style="width:15px;">Temps restant sur batterie: </span>
+			<span title="Temps restant sur batterie (batt_runtime) en secondes" style="width:15px;">Temps restant sur batterie: </span>
 			<span id="batt_runtime#id#"></span><span> s</span>
 	</div>
 	<script>
@@ -151,13 +151,31 @@
 			$('#batt_runtime#id#').append('<span data-cmd_id="#batt_runtimeid#" class="history cursor">#batt_runtime#</span>');
 		}
     </script>
+  	<div class="tooltips"  data-cmd_id="#batt_runtime_minid#" style="margin-left:5px;display: #batt_runtime_min_display#;">
+			<span title="Temps restant sur batterie (batt_runtime) en minutes" style="width:15px;">Temps restant sur batterie: </span>
+			<span id="batt_runtime_min#id#"></span><span> min</span>
+	</div>
+	<script>
+		if ('#cnx_ssh#' == 'OK' || '#cnx_ssh#' == 'No') {
+			$('#batt_runtime_min#id#').append('<span data-cmd_id="#batt_runtime_minid#" class="history cursor">#batt_runtime_min#</span>');
+		}
+    </script>
 	<div class="tooltips"  data-cmd_id="#timer_shutdownid#" style="margin-left:5px;display: #timer_shutdown_display#;">
-			<span title="Temps restant avant arrêt (timer_shutdown)" style="width:15px;">Temps restant avant arrêt: </span>
+			<span title="Temps restant avant arrêt (timer_shutdown) en secondes" style="width:15px;">Temps restant avant arrêt: </span>
 			<span id="timer_shutdown#id#"></span><span> s</span>
 	</div>
 	<script>
 		if ('#cnx_ssh#' == 'OK' || '#cnx_ssh#' == 'No') {
 			$('#timer_shutdown#id#').append('<span data-cmd_id="#timer_shutdownid#" class="history cursor">#timer_shutdown#</span>');
+		}
+    </script>
+  	<div class="tooltips"  data-cmd_id="#timer_shutdown_minid#" style="margin-left:5px;display: #timer_shutdown_min_display#;">
+			<span title="Temps restant avant arrêt (timer_shutdown) en minutes" style="width:15px;">Temps restant avant arrêt: </span>
+			<span id="timer_shutdown_min#id#"></span><span> min</span>
+	</div>
+ 	 <script>
+		if ('#cnx_ssh#' == 'OK' || '#cnx_ssh#' == 'No') {
+			$('#timer_shutdown_min#id#').append('<span data-cmd_id="#timer_shutdown_minid#" class="history cursor">#timer_shutdown_min#</span>');
 		}
     </script>
 	<div class="tooltips" data-cmd_id="#beeper_statid#" style="margin-left:5px;display: #beeper_stat_display#;">
@@ -170,5 +188,3 @@
 		}
     </script>
 </div>
-
-
