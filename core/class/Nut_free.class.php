@@ -488,16 +488,16 @@ class Nut_free extends eqLogic {
 		
 	}
 	
-	function getCaseAction($paramaction) {
+	public function getCaseAction($paramaction) {
 		
 
-			$ip = $this->getConfiguration('addressip');
+			$ip 		= $this->getConfiguration('addressip');
 			$UPS_auto_select= $this->getConfiguration('UPS_auto_select');
-			$user = $this->getConfiguration('user');
-			$pass = $this->getConfiguration('password');
-			$port = $this->getConfiguration('portssh');
-			$ups = $this->getConfiguration('ups');
-			$equipement = $this->getName();
+			$user 		= $this->getConfiguration('user');
+			$pass 		= $this->getConfiguration('password');
+			$port		= $this->getConfiguration('portssh');
+			$ups 		= $this->getConfiguration('ups');
+			$equipement 	= $this->getName();
 		
 			if (!$connection = ssh2_connect($ip,$port)) {
 				log::add('Nut_free', 'error', 'connexion SSH KO pour '.$equipement);
