@@ -19,7 +19,7 @@
 				$('#iconSSH#id#').append('<i title="Connexion SSH KO" class="fa fa-times tooltips" style="font-size : 1.1em;color: #FF0000;"></i>');
 			}
 		
-			if (('#ups_line#' == 'OL CHRG')||('#ups_line#' == 'OL')) {
+			if (('#ups_line#' == 'OL CHRG')||('#ups_line#' == 'OL')||('#ups_line#'.search('OL')>-1)) {
 				
 				$('#iconUPS_line#id#').append('<i title="Sur secteur" class="techno techno-plug2 tooltips" style="font-size : 1.1em;color: #00FF00;" ></i>');
 			} 
