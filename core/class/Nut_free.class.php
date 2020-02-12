@@ -440,7 +440,7 @@ class Nut_free extends eqLogic {
 				}
               
              	/*Affiche en minutes*/
-            	if($idx==15 || $idx==15){
+            	if (($info['logicalId']=='batt_runtime_min') ||($info['logicalId']=='timer_shutdown_min')){
                 $result = (int)($result/60);
                 }
 				/*Log pour debug */
