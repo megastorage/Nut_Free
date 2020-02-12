@@ -440,7 +440,7 @@ class Nut_free extends eqLogic {
 				}
               
              	/*Affiche en minutes*/
-            	if($idx==14 || $idx==14){
+            	if($idx==15 || $idx==15){
                 $result = (int)($result/60);
                 }
 				/*Log pour debug */
