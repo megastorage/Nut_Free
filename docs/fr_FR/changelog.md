@@ -1,3 +1,6 @@
+## 0.34: ##
+12/02/2020 Ajout RealPower et modification sur la gestion de l'icon Sur batterie/Secteur
+
 ## 0.33: ##
 04/02/2020 Ajout temps en minutes pour batt_runtime et timer_shutdown
 
