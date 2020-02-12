@@ -131,7 +131,7 @@ class Nut_free extends eqLogic {
 			'name' =>'Temps restant sur batterie en min',
 			'logicalId'=>'batt_runtime_min',
 			'cmd'=>'battery.runtime',
-			'unite'=>'s',
+			'unite'=>'min',
 		),
 		array(
 			'name' =>'Temps restant avant arrêt en s',
