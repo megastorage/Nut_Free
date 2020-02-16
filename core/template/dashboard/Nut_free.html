@@ -1,6 +1,5 @@
-<div id="plugin_container" class=" eqLogic-widget eqLogic allowResize #history#" style="width:#width#;height:#height#;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#; #style#" data-category="" data-eqLogic_id="#id#" data-version="#version#" >
-  <center class="widget-name"><strong><a href="#eqLink#" style="font-size : 1.1em;#hideEqLogicName#">#name_display#</strong></a>
-  <span style="font-size: 0.85em;position: relative;top:-2px;">#object_name#</span>
+<div id="plugin_container" class="eqLogic-widget eqLogic allowResize" style="width:#width#;height:#height#;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#; #style#" data-translate-category="#translate_category#" data-category="#category#" data-eqLogic_id="#id#" data-version="#version#" >
+    <center class="widget-name" style="padding-right: 0px;"><a href="#eqLink#" style="font-size : 1.1em;#hideEqLogicName#">#name_display#<span style="font-size: 0.85em;position: relative;top:-2px;display:none;" class="object_name">#object_name#</span></a>
 		
 		<span id="iconUPS_line#id#" style="float: left;width:25px"></span><span id="iconSSH#id#" style="float: right;width:25px"></span>
 		
@@ -19,7 +18,7 @@
 				$('#iconSSH#id#').append('<i title="Connexion SSH KO" class="fa fa-times tooltips" style="font-size : 1.1em;color: #FF0000;"></i>');
 			}
 		
-			if (('#ups_line#' == 'OL CHRG')||('#ups_line#' == 'OL')) {
+			if (('#ups_line#' == 'OL CHRG')||('#ups_line#' == 'OL')||('#ups_line#'.search('OL')>-1)) {
 				
 				$('#iconUPS_line#id#').append('<i title="Sur secteur" class="techno techno-plug2 tooltips" style="font-size : 1.1em;color: #00FF00;" ></i>');
 			} 
@@ -106,6 +105,17 @@
 			$('#output_power#id#').append('<span data-cmd_id="#output_powerid#" class="history cursor">#output_power#</span>');
 		}
     </script>
+	
+	<div class="tooltips"  data-cmd_id="#output_real_powerid#" style="margin-left:5px;display: #output_real_power_display#;">
+			<span title="Puissance de sortie (output_real_power)" style="width:15px;">Puissance de sortie: </span>
+			<span id="output_real_power#id#"></span><span> W</span>
+	</div>
+	<script>
+		if ('#cnx_ssh#' == 'OK' || '#cnx_ssh#' == 'No') {
+			$('#output_real_power#id#').append('<span data-cmd_id="#output_real_powerid#" class="history cursor">#output_real_power#</span>');
+		}
+    </script>	
+	
 	<div class="tooltips"  data-cmd_id="#batt_chargeid#" style="margin-left:5px;display: #batt_charge_display#;">
 			<span title="Niveau de charge batterie (batt_charge)" style="width:15px;">Niveau de charge batterie: </span>
 			<span id="batt_charge#id#"></span><span> %</span>

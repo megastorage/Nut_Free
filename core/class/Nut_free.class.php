@@ -92,6 +92,12 @@ class Nut_free extends eqLogic {
 			'unite'=>'W',
 		),
 		array(
+			'name' =>'Puissance en sortie réel',
+			'logicalId'=>'output_real_power',
+			'cmd'=>'ups.realpower',
+			'unite'=>'W',
+		),
+		array(
 			'name' =>'Niveau de charge batterie',
 			'logicalId'=>'batt_charge',
 			'cmd'=>'battery.charge',
@@ -104,11 +110,11 @@ class Nut_free extends eqLogic {
 			'unite'=>'V',
 		),
 		array(
-            'name'      => 'Température de la batterie',
-            'logicalId' => 'batt_temp',
-            'cmd'       => 'battery.temperature',
-            'unite'     => '°C',
-        ),
+		  	'name'      => 'Température de la batterie',
+		  	'logicalId' => 'batt_temp',
+		  	'cmd'       => 'battery.temperature',
+		  	'unite'     => '°C',
+		),
 		array(
 			'name' =>'Charge onduleur',
 			'logicalId'=>'ups_load',
@@ -121,11 +127,11 @@ class Nut_free extends eqLogic {
 			'cmd'=>'battery.runtime',
 			'unite'=>'s',
 		),
-     	 array(
+     		 array(
 			'name' =>'Temps restant sur batterie en min',
 			'logicalId'=>'batt_runtime_min',
 			'cmd'=>'battery.runtime',
-			'unite'=>'s',
+			'unite'=>'min',
 		),
 		array(
 			'name' =>'Temps restant avant arrêt en s',
@@ -133,7 +139,7 @@ class Nut_free extends eqLogic {
 			'cmd'=>'ups.timer.shutdown',
 			'unite'=>'s',
 		),
-      	array(
+      		array(
 			'name' =>'Temps restant avant arrêt en min',
 			'logicalId'=>'timer_shutdown_min',
 			'cmd'=>'ups.timer.shutdown',
@@ -434,7 +440,7 @@ class Nut_free extends eqLogic {
 				}
               
              	/*Affiche en minutes*/
-            	if($idx==14 || $idx==14){
+            	if (($info['logicalId']=='batt_runtime_min') ||($info['logicalId']=='timer_shutdown_min')){
                 $result = (int)($result/60);
                 }
 				/*Log pour debug */
