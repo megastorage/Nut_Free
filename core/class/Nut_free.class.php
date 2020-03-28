@@ -431,12 +431,22 @@ class Nut_free extends eqLogic {
 					fclose($resultoutput);
 				}
               
+				/*Gestion des particularitées*/
 				/*Affichage sur une ligne Marque / Model*/
 				if ($idx==0){
 					$Marque = $result;
 				}
 				if ($idx==1){
 					$result = $Marque.' '.$result;
+				}
+				
+				if ($idx==3 & (!strpos($result, 'OL'))){
+					$Not_Online = 1;
+				}else{ 
+					$Not_Online = 0;
+				}
+				if ($idx==4 & $Not_Online==1){
+					$result = 0;
 				}
               
              	/*Affiche en minutes*/
