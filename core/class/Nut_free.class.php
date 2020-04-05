@@ -450,6 +450,7 @@ class Nut_free extends eqLogic {
 				}
 				if (($info['logicalId']=='input_volt') & $Not_Online==1){
 					$result = 0;
+					log::add ('Nut_free', 'debug', 'Result Modifié: '.$result);
 				}
               
              	/*Affiche en minutes*/
