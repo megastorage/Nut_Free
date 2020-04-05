@@ -442,7 +442,7 @@ class Nut_free extends eqLogic {
 				
 				if($info['logicalId']=='ups_line'){
 
-			    if (stristr($result,'OB')==False){
+			    if (stristr($result,'OL')==False){
 						$Not_Online = 1;
 
 					}else{ 
