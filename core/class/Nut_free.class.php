@@ -441,19 +441,20 @@ class Nut_free extends eqLogic {
 				}
 				
 				if($info['logicalId']=='ups_line'){
-					
-					if (!strpos($result, 'OL')){
-					$Not_Online = 1;
-					log::add ('Nut_free', 'debug', $equipement. ' Not Online: '.$Not_Online .' Result: '.$result);
-				}else{ 
-					$Not_Online = 0;
-					log::add ('Nut_free', 'debug',  $equipement. ' Not Online: '.$Not_Online .' Result: '.$result);
+
+			    if (stristr($result,'OB')==False){
+						$Not_Online = 1;
+
+					}else{ 
+						$Not_Online = 0;
+
+						}
+			  log::add ('Nut_free', 'debug',  $equipement. ' UPS Not Online: '.$Not_Online .' Result: '.$result);
 					}
-				}
-				if (($info['logicalId']=='input_volt') & $Not_Online==1){
-					$result = 0;
-					log::add ('Nut_free', 'debug', $equipement. ' Result Modifié: '.$result);
-				}
+					if (($info['logicalId']=='input_volt') & $Not_Online==1){
+						$result = 0;
+						log::add ('Nut_free', 'debug', $equipement. ' UPS Result Modifié: '.$result);
+					}
               
              	/*Affiche en minutes*/
             	if (($info['logicalId']=='batt_runtime_min') ||($info['logicalId']=='timer_shutdown_min')){
