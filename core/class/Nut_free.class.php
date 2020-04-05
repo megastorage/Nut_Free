@@ -440,12 +440,15 @@ class Nut_free extends eqLogic {
 					$result = $Marque.' '.$result;
 				}
 				
-				if ($idx==3 & (!strpos($result, 'OL'))){
+				'if ($idx==3 & (!strpos($result, 'OL'))){
+				if(($info['logicalId']=='ups_line')& (!strpos($result, 'OL'))){
 					$Not_Online = 1;
+					log::add ('Nut_free', 'debug', 'Not Online: '.$Not_Online .' Result: '.$result);
 				}else{ 
 					$Not_Online = 0;
+					log::add ('Nut_free', 'debug', 'Not Online: '.$Not_Online .' Result: '.$result);
 				}
-				if ($idx==4 & $Not_Online==1){
+				if (($info['logicalId']=='input_volt') & $Not_Online==1){
 					$result = 0;
 				}
               
