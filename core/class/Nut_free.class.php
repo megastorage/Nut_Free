@@ -431,6 +431,7 @@ class Nut_free extends eqLogic {
 					fclose($resultoutput);
 				}
               
+				/*Gestion des particularitées*/
 				/*Affichage sur une ligne Marque / Model*/
 				if ($idx==0){
 					$Marque = $result;
@@ -438,6 +439,22 @@ class Nut_free extends eqLogic {
 				if ($idx==1){
 					$result = $Marque.' '.$result;
 				}
+				
+				if($info['logicalId']=='ups_line'){
+
+			    if (stristr($result,'OL')==False){
+						$Not_Online = 1;
+
+					}else{ 
+						$Not_Online = 0;
+
+						}
+			  log::add ('Nut_free', 'debug',  $equipement. ' UPS Not Online: '.$Not_Online .' Result: '.$result);
+					}
+					if (($info['logicalId']=='input_volt') & $Not_Online==1){
+						$result = 0;
+						log::add ('Nut_free', 'debug', $equipement. ' UPS Result Modifié: '.$result);
+					}
               
              	/*Affiche en minutes*/
             	if (($info['logicalId']=='batt_runtime_min') ||($info['logicalId']=='timer_shutdown_min')){
