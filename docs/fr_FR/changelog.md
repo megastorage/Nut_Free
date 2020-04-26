@@ -1,3 +1,6 @@
+## 0.35: ##
+26/04/2020 Correction des warnings en retours dans Cron_event
+
 ## 0.34: ##
 12/02/2020 Ajout RealPower et modification sur la gestion de l'icon Sur batterie/Secteur
 
