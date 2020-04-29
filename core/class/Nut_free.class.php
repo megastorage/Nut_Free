@@ -349,7 +349,7 @@ class Nut_free extends eqLogic {
 		
 		//initialisation du mode deporter ou pass
 		$cnx_ssh = 'KO';
-		
+		$Not_Online = 0;
 		if ($ssh_op == '0')
 		{
 			$upscmd="upsc -l ".$ip."  > /dev/stdout 2> /dev/null";
@@ -458,7 +458,10 @@ class Nut_free extends eqLogic {
               
              	/*Affiche en minutes*/
             	if (($info['logicalId']=='batt_runtime_min') ||($info['logicalId']=='timer_shutdown_min')){
-                $result = (int)($result/60);
+			 //echo gettype($result);
+			settype($result, "float");
+		       // echo $result;
+			$result = (int)($result/60);
                 }
 				/*Log pour debug */
 				if (!strstr($errorresult,'not supported by UPS')){
