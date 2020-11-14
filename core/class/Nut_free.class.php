@@ -365,7 +365,8 @@ class Nut_free extends eqLogic {
 			$user = $this->getConfiguration('user');
 			$pass = $this->getConfiguration('password');
 			$port = $this->getConfiguration('portssh');
-			
+			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
+			log::add('Nut_free', 'debug',' --------------Connexion SSH   -----------------------' );
 			if (!$sshconnection = ssh2_connect($ip,$port)){
 				log::add('Nut_free', 'error', 'connexion SSH KO pour ' . $equipement );
 				log::add('Nut_free', 'debug', 'connexion SSH KO pour ' . $equipement );
