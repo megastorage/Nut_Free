@@ -406,17 +406,17 @@ class Nut_free extends eqLogic {
 		log::add('Nut_free', 'debug',' -----------------------------------------------------' );
 		foreach(self::$_infosMap as $idx=>$info)
 		{
+			$errorresult="";
+			
 			if(isset($info['cmd'])) //verifie que l'on a une cmd a executer
 			{
-				$errorresult="";
+				
 				if ($ssh_op == '0')
 				{
-					
 					/* 2>&1 permet de recuperer l'erreur et la traiter */
 					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					$result = exec($cmdline);
 					
-
 				}else{
 					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					
@@ -454,6 +454,7 @@ class Nut_free extends eqLogic {
 						$Not_Online = 0;
 
 						}
+			/* Logs*/		
 			  log::add ('Nut_free', 'debug',  $equipement. ' UPS Not Online: '.$Not_Online .' Result: '.$result);
 					}
 					if (($info['logicalId']=='input_volt') & $Not_Online==1){
