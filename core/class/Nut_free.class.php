@@ -408,29 +408,34 @@ class Nut_free extends eqLogic {
 		{
 			if(isset($info['cmd'])) //verifie que l'on a une cmd a executer
 			{
+				$errorresult="";
 				if ($ssh_op == '0')
 				{
-					$errorresult="";
+					
 					/* 2>&1 permet de recuperer l'erreur et la traiter */
 					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					$result = exec($cmdline);
-					if (strstr($result,'not supported by UPS')){
-						$errorresult=$result;
-					}
+					
 
 				}else{
 					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					
 					$resultoutput = ssh2_exec($sshconnection, $cmdline); 
 					stream_set_blocking($resultoutput, true);
-					
 					$result =stream_get_contents($resultoutput);
-					$errorStream = ssh2_fetch_stream($resultoutput, SSH2_STREAM_STDERR);
-					stream_set_blocking($errorStream, true);
-					$errorresult = stream_get_contents($errorStream);
+					
+					//Suite modif avec retour d'error supprimé
+					//$errorStream = ssh2_fetch_stream($resultoutput, SSH2_STREAM_STDERR);
+					//stream_set_blocking($errorStream, true);
+					//$errorresult = stream_get_contents($errorStream);
 					fclose($resultoutput);
 				}
-              
+              			
+				// Si non supporté transfert vers erreur
+				if (strstr($result,'not supported by UPS')){
+					$errorresult=$result;
+				}
+				
 				/*Gestion des particularitées*/
 				/*Affichage sur une ligne Marque / Model*/
 				if ($idx==0){
