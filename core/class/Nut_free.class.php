@@ -352,7 +352,7 @@ class Nut_free extends eqLogic {
 		$Not_Online = 0;
 		if ($ssh_op == '0')
 		{
-			$upscmd="upsc -l ".$ip." 2>1| grep -v '^Init SSL'";
+			$upscmd="upsc -l ".$ip." | grep -v '^Init SSL'";
 			$ups_auto=exec ($upscmd);
 			
 			if (($ups=='')&&($ssh_op == '0')){
@@ -375,7 +375,7 @@ class Nut_free extends eqLogic {
 				$cnx_ssh = 'KO';
 				}else{
 					
-					$upscmd = "upsc -l 2>1| grep -v '^Init SSL'";
+					$upscmd = "upsc -l | grep -v '^Init SSL'";
 					$ups_output = ssh2_exec($sshconnection, $upscmd); 
 					stream_set_blocking($ups_output, true);
 					$ups_auto = stream_get_contents($ups_output);
@@ -412,14 +412,14 @@ class Nut_free extends eqLogic {
 				{
 					$errorresult="";
 					/* 2>&1 permet de recuperer l'erreur et la traiter */
-					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>1| grep -v '^Init SSL'";
+					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." | grep -v '^Init SSL'";
 					$result = exec($cmdline);
 					if (strstr($result,'not supported by UPS')){
 						$errorresult=$result;
 					}
 
 				}else{
-					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>1| grep -v '^Init SSL'";
+					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." | grep -v '^Init SSL'";
 					
 					$resultoutput = ssh2_exec($sshconnection, $cmdline); 
 					stream_set_blocking($resultoutput, true);
