@@ -375,7 +375,7 @@ class Nut_free extends eqLogic {
 				$cnx_ssh = 'KO';
 				}else{
 					
-					$upscmd = "upsc -l";
+					$upscmd = "upsc -l 2>1| grep -v '^Init SSL'";
 					$ups_output = ssh2_exec($sshconnection, $upscmd); 
 					stream_set_blocking($ups_output, true);
 					$ups_auto = stream_get_contents($ups_output);
