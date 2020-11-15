@@ -360,6 +360,9 @@ class Nut_free extends eqLogic {
 			if (($ups=='')&&($ssh_op == '0')){
 			log::add('Nut_free', 'debug',' -------------- Utilisation UPS Auto-----------------------' );
 				$ups = $ups_auto;
+				
+				else{
+					log::add('Nut_free', 'debug',' -------------- Utilisation MAnuel:'. $ups);}
 			}
 			
 			$cnx_ssh = 'OK';
