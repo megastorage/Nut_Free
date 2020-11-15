@@ -423,7 +423,7 @@ class Nut_free extends eqLogic {
 					$result = exec($cmdline);
 					
 				}else{
-					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
+					$cmdline = "upsc ".$ups." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					
 					$resultoutput = ssh2_exec($sshconnection, $cmdline); 
 					stream_set_blocking($resultoutput, true);
