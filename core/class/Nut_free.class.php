@@ -351,15 +351,15 @@ class Nut_free extends eqLogic {
 		$cnx_ssh = 'KO';
 		$Not_Online = 0;
 	   	log::add('Nut_free', 'debug',' -----------------------------------------------------' );
-	   	log::add('Nut_free', 'debug','			Debut des logs-----------------------' );
+	   	log::add('Nut_free', 'debug','			Debut des logs' );
 		if ($ssh_op == '0')
 		{
-			log::add('Nut_free', 'debug','			Connexion Non SSH-----------------------' );
+			log::add('Nut_free', 'debug','			Connexion Non SSH' );
 			$upscmd="upsc -l ".$ip." 2>&1 | grep -v '^Init SSL'";
 			$ups_auto=exec ($upscmd);
 			
 			if (($ups=='')&&($ssh_op == '0')){
-			log::add('Nut_free', 'debug','			Utilisation UPS Auto-----------------------' );
+			log::add('Nut_free', 'debug','			Utilisation UPS Auto' );
 				$ups = $ups_auto;
 				
 				}else{
