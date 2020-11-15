@@ -526,8 +526,10 @@ class Nut_free extends eqLogic {
 			log::add('Nut_free', 'debug', $equipement.' UPS commande pour auto_detect: '. $upscmd);
 			log::add('Nut_free', 'debug', $equipement.' UPS Connexion type: '. $conf_ssh. $ssh_op) .$cnx_ssh;
 			log::add('Nut_free', 'debug', $equipement.' UPS Commande envoyée: '. $cmdline);
+			log::add('Nut_free', 'debug',' --------------Fin des logs---------------------------' );
 			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
-			log::add('Nut_free', 'debug',' --------------Fin des logs-----------------------' );
+			log::add('Nut_free', 'debug',' ' );
+			
 		}				
 		
 	}
