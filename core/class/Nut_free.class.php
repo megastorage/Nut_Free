@@ -350,32 +350,43 @@ class Nut_free extends eqLogic {
 		//initialisation du mode deporter ou pass
 		$cnx_ssh = 'KO';
 		$Not_Online = 0;
+	   	log::add('Nut_free', 'debug',' -----------------------------------------------------' );
+	   	log::add('Nut_free', 'debug','			Debut des logs' );
 		if ($ssh_op == '0')
 		{
-			$upscmd="upsc -l ".$ip."  > /dev/stdout 2> /dev/null";
+			log::add('Nut_free', 'debug','			Connexion Non SSH' );
+			$upscmd="upsc -l ".$ip." 2>&1 | grep -v '^Init SSL'";
 			$ups_auto=exec ($upscmd);
 			
 			if (($ups=='')&&($ssh_op == '0')){
-				
+			log::add('Nut_free', 'debug','			Utilisation UPS Auto' );
 				$ups = $ups_auto;
-			}
+				
+				}else{
+					log::add('Nut_free', 'debug','			Utilisation MAnuel:'. $ups);}
+			
 			
 			$cnx_ssh = 'OK';
 		}elseif ($ssh_op == '1'){
 			$user = $this->getConfiguration('user');
 			$pass = $this->getConfiguration('password');
 			$port = $this->getConfiguration('portssh');
-			
+			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
+			log::add('Nut_free', 'debug','			Connexion SSH' );
 			if (!$sshconnection = ssh2_connect($ip,$port)){
-				log::add('Nut_free', 'error', 'connexion SSH KO pour ' . $equipement );
+				log::add('Nut_free', 'error', '			connexion SSH KO pour ' . $equipement );
+				log::add('Nut_free', 'debug', 'connexion SSH KO pour ' . $equipement );
 				$cnx_ssh = 'KO';
 			}else{
+				log::add('Nut_free', 'debug', '			Liaison ok: ' . $equipement );
 				if (!ssh2_auth_password($sshconnection,$user,$pass)){
 				log::add('Nut_free', 'error', 'Authentification SSH KO pour ' . $equipement );
+				log::add('Nut_free', 'debug', 'Authentification SSH KO pour ' . $equipement );
 				$cnx_ssh = 'KO';
+			
 				}else{
-					
-					$upscmd = "upsc -l";
+					log::add('Nut_free', 'debug', '			Authentification SSH OK pour ' . $equipement );
+					$upscmd = "upsc -l 2>&1 | grep -v '^Init SSL'";
 					$ups_output = ssh2_exec($sshconnection, $upscmd); 
 					stream_set_blocking($ups_output, true);
 					$ups_auto = stream_get_contents($ups_output);
@@ -406,31 +417,36 @@ class Nut_free extends eqLogic {
 		log::add('Nut_free', 'debug',' -----------------------------------------------------' );
 		foreach(self::$_infosMap as $idx=>$info)
 		{
+			$errorresult="";
+			
 			if(isset($info['cmd'])) //verifie que l'on a une cmd a executer
 			{
+				
 				if ($ssh_op == '0')
 				{
-					$errorresult="";
 					/* 2>&1 permet de recuperer l'erreur et la traiter */
-					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1";
+					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					$result = exec($cmdline);
-					if (strstr($result,'not supported by UPS')){
-						$errorresult=$result;
-					}
-
+					
 				}else{
-					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd'];
+					$cmdline = "upsc ".$ups." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					
 					$resultoutput = ssh2_exec($sshconnection, $cmdline); 
 					stream_set_blocking($resultoutput, true);
-					
 					$result =stream_get_contents($resultoutput);
-					$errorStream = ssh2_fetch_stream($resultoutput, SSH2_STREAM_STDERR);
-					stream_set_blocking($errorStream, true);
-					$errorresult = stream_get_contents($errorStream);
+					
+					//Suite modif avec retour d'error supprimé
+					//$errorStream = ssh2_fetch_stream($resultoutput, SSH2_STREAM_STDERR);
+					//stream_set_blocking($errorStream, true);
+					//$errorresult = stream_get_contents($errorStream);
 					fclose($resultoutput);
 				}
-              
+              			
+				// Si non supporté transfert vers erreur
+				if (strstr($result,'not supported by UPS')){
+					$errorresult=$result;
+				}
+				
 				/*Gestion des particularitées*/
 				/*Affichage sur une ligne Marque / Model*/
 				if ($idx==0){
@@ -449,6 +465,7 @@ class Nut_free extends eqLogic {
 						$Not_Online = 0;
 
 						}
+			/* Logs*/		
 			  log::add ('Nut_free', 'debug',  $equipement. ' UPS Not Online: '.$Not_Online .' Result: '.$result);
 					}
 					if (($info['logicalId']=='input_volt') & $Not_Online==1){
@@ -508,8 +525,13 @@ class Nut_free extends eqLogic {
 			log::add('Nut_free', 'debug', $equipement.' UPS configured: ' . $ups_debug );
 			log::add('Nut_free', 'debug', $equipement.' UPS auto detect: '. $conf_ups. $ups_auto);
 			log::add('Nut_free', 'debug', $equipement.' UPS commande pour auto_detect: '. $upscmd);
-			log::add('Nut_free', 'debug', $equipement.' UPS Connexion type: '. $conf_ssh. $ssh_op);
+			log::add('Nut_free', 'debug', $equipement.' UPS Connexion type: '. $conf_ssh. $ssh_op) .$cnx_ssh;
+			log::add('Nut_free', 'debug', $equipement.' UPS Commande envoyée: '. $cmdline);
 			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
+			log::add('Nut_free', 'debug','			Fin des logs' );
+			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
+			log::add('Nut_free', 'debug',' ' );
+			
 		}				
 		
 	}
