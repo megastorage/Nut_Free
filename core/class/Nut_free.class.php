@@ -89,7 +89,7 @@ class Nut_free extends eqLogic {
 			'name' =>'Puissance en sortie',
 			'logicalId'=>'output_power',
 			'cmd'=>'ups.power',
-			'unite'=>'W',
+			'unite'=>'VA',
 		),
 		array(
 			'name' =>'Puissance en sortie réel',
