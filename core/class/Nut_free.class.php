@@ -116,6 +116,12 @@ class Nut_free extends eqLogic {
 		  	'unite'     => '°C',
 		),
 		array(
+			'name'      => 'Température ups',
+			'logicalId' => 'ups_temp',
+			'cmd'       => 'ups.temperature',
+			'unite'     => '°C',
+	  ),
+		array(
 			'name' =>'Charge onduleur',
 			'logicalId'=>'ups_load',
 			'cmd'=>'ups.load',
