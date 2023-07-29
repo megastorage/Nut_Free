@@ -10,8 +10,10 @@ if [ $versionPHP = "5" ]
 		sudo apt-get clean
 		echo 20 > /tmp/dependancy_Nut_free_in_progress
 		sudo apt-get update
-		echo 80 > /tmp/dependancy_Nut_free_in_progress
+		echo 60 > /tmp/dependancy_Nut_free_in_progress
 		sudo apt-get install -y nut-client
+  		echo 80 > /tmp/dependancy_Nut_free_in_progress
+		sudo apt-get install -y php-phpseclib
 		echo 100 > /tmp/dependancy_Nut_free_in_progress
 		echo "Tout est installé avec succès - Everything is successfully installed!"
 		echo "*****************************************************************************************************"
@@ -26,11 +28,10 @@ if [ $versionPHP = "7" ]
 		sudo apt-get clean
 		echo 20 > /tmp/dependancy_Nut_free_in_progress
 		sudo apt-get update
-		echo 80 > /tmp/dependancy_Nut_free_in_progress
-			
-		echo 90 > /tmp/dependancy_Nut_free_in_progress
-			
-			sudo apt-get install -y nut-client
+		echo 60 > /tmp/dependancy_Nut_free_in_progress
+		sudo apt-get install -y nut-client
+  		echo 80 > /tmp/dependancy_Nut_free_in_progress
+		sudo apt-get install -y php-phpseclib
 		echo 100 > /tmp/dependancy_Nut_free_in_progress
 		echo "*****************************************************************************************************"
 		echo "*  Installation Ok																				  *"

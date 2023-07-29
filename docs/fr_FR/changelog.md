@@ -1,3 +1,9 @@
+## 0.38: ##
+30/07/2023 Remplacement de libSSH2 par php-phpseclib
+
+## 0.37: ##
+26/03/2023 Ajout ups.temp
+
 ## 0.36: ##
 14/11/2020 Ajout 2>1| grep -v '^Init SSL' suite probleme sur PI4 en local. Erreur de sertificat SSL
 
