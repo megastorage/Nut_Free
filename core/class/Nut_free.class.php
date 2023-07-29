@@ -18,7 +18,7 @@
 
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-include('Net/SFTP.php');
+
 					
 class Nut_free extends eqLogic {
 	
@@ -379,24 +379,21 @@ class Nut_free extends eqLogic {
 			$port = $this->getConfiguration('portssh');
 			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
 			log::add('Nut_free', 'debug','			Connexion SSH' );
-			//if (!$sshconnection = ssh2_connect($ip,$port)){
-			if (!$sshconnection = new Net_SSH2($ip,$port)){
+			if (!$sshconnection = ssh2_connect($ip,$port)){
 				log::add('Nut_free', 'error', '			connexion SSH KO pour ' . $equipement );
 				log::add('Nut_free', 'debug', 'connexion SSH KO pour ' . $equipement );
 				$cnx_ssh = 'KO';
 			}else{
 				log::add('Nut_free', 'debug', '			Liaison ok: ' . $equipement );
-				//if (!ssh2_auth_password($sshconnection,$user,$pass)){
-				if (!$sshconnection->login('username', 'password')){
+				if (!ssh2_auth_password($sshconnection,$user,$pass)){
 				log::add('Nut_free', 'error', 'Authentification SSH KO pour ' . $equipement );
 				log::add('Nut_free', 'debug', 'Authentification SSH KO pour ' . $equipement );
 				$cnx_ssh = 'KO';
-				
+			
 				}else{
 					log::add('Nut_free', 'debug', '			Authentification SSH OK pour ' . $equipement );
 					$upscmd = "upsc -l 2>&1 | grep -v '^Init SSL'";
-					//$ups_output = ssh2_exec($sshconnection, $upscmd);
-					$ups_output = $sshconnection->exec($upscmd);  
+					$ups_output = ssh2_exec($sshconnection, $upscmd); 
 					stream_set_blocking($ups_output, true);
 					$ups_auto = stream_get_contents($ups_output);
 					fclose($ups_output); 
@@ -440,8 +437,7 @@ class Nut_free extends eqLogic {
 				}else{
 					$cmdline = "upsc ".$ups." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					
-					//$resultoutput = ssh2_exec($sshconnection, $cmdline); 
-					$resultoutput = $sshconnection->exec($cmdline); 
+					$resultoutput = ssh2_exec($sshconnection, $cmdline); 
 					stream_set_blocking($resultoutput, true);
 					$result =stream_get_contents($resultoutput);
 					
@@ -557,12 +553,11 @@ class Nut_free extends eqLogic {
 			$ups 		= $this->getConfiguration('ups');
 			$equipement 	= $this->getName();
 		
-			if (!$ssh = new Net_SSH2($ip,$port)) {
+			if (!$connection = ssh2_connect($ip,$port)) {
 				log::add('Nut_free', 'error', 'connexion SSH KO pour '.$equipement);
 				$cnx_ssh = 'KO';
 			}else{
-				//if (!ssh2_auth_password($connection,$user,$pass)){	
-				if (!$ssh->login('username', 'password')){	
+				if (!ssh2_auth_password($connection,$user,$pass)){
 				log::add('Nut_free', 'error', 'Authentification SSH KO pour '.$equipement);
 				$cnx_ssh = 'KO';
 				}
