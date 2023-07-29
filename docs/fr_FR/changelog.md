@@ -1,3 +1,6 @@
+## 0.38: ##
+30/07/2023 Remplacement de libSSH2 par php-phpseclib
+
 ## 0.37: ##
 26/03/2023 Ajout ups.temp
 
