@@ -17,11 +17,21 @@
  */
 
 /* * ***************************Includes********************************* */
+//namespace Composer\Autoload;
+
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
-					
+
+set_include_path(get_include_path() . get_include_path().'/phpseclib');
+include('Net/SSH2.php');
+include('Crypt/RSA.php');
+include('autoload.php');
+
+use phpseclib\Net\SSH2;
+//echo('if you are reading this, phpseclib has been included');
+
 class Nut_free extends eqLogic {
-	
+
 	public static $_infosMap = array(
 		//on cree un tableau contenant la liste des infos a traiter 
 		//chaque info a un sous tableau avec les parametres 
@@ -340,7 +350,7 @@ class Nut_free extends eqLogic {
 	}
 	*/
    public function getInformations() {
-		
+
 		//ici tu pourrais sortir direcetement si l'eqp n'est pas actif -> 
 		if (!$this->getIsEnable()) return;
 		
@@ -369,7 +379,7 @@ class Nut_free extends eqLogic {
 				$ups = $ups_auto;
 				
 				}else{
-					log::add('Nut_free', 'debug','			Utilisation MAnuel:'. $ups);}
+					log::add('Nut_free', 'debug','			Utilisation Manuel:'. $ups);}
 			
 			
 			$cnx_ssh = 'OK';
@@ -379,24 +389,28 @@ class Nut_free extends eqLogic {
 			$port = $this->getConfiguration('portssh');
 			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
 			log::add('Nut_free', 'debug','			Connexion SSH' );
-			if (!$sshconnection = ssh2_connect($ip,$port)){
+			
+			if (!$sshconnection = new SSH2($ip,$port)){
 				log::add('Nut_free', 'error', '			connexion SSH KO pour ' . $equipement );
 				log::add('Nut_free', 'debug', 'connexion SSH KO pour ' . $equipement );
 				$cnx_ssh = 'KO';
 			}else{
 				log::add('Nut_free', 'debug', '			Liaison ok: ' . $equipement );
-				if (!ssh2_auth_password($sshconnection,$user,$pass)){
+		
+				if (!$sshconnection->login($user, $pass)){
+				//Erreur Authentificaton
 				log::add('Nut_free', 'error', 'Authentification SSH KO pour ' . $equipement );
 				log::add('Nut_free', 'debug', 'Authentification SSH KO pour ' . $equipement );
 				$cnx_ssh = 'KO';
-			
+				
 				}else{
+
 					log::add('Nut_free', 'debug', '			Authentification SSH OK pour ' . $equipement );
 					$upscmd = "upsc -l 2>&1 | grep -v '^Init SSL'";
-					$ups_output = ssh2_exec($sshconnection, $upscmd); 
-					stream_set_blocking($ups_output, true);
-					$ups_auto = stream_get_contents($ups_output);
-					fclose($ups_output); 
+					
+					$ups_auto = $sshconnection->exec($upscmd); 
+
+					//suppression du retour chariot
 					$ups_auto = substr($ups_auto, 0, -1);
 					
 					if ($ups==''){
@@ -436,17 +450,11 @@ class Nut_free extends eqLogic {
 					
 				}else{
 					$cmdline = "upsc ".$ups." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
-					
-					$resultoutput = ssh2_exec($sshconnection, $cmdline); 
-					stream_set_blocking($resultoutput, true);
-					$result =stream_get_contents($resultoutput);
-					
-					//Suite modif avec retour d'error supprimé
-					//$errorStream = ssh2_fetch_stream($resultoutput, SSH2_STREAM_STDERR);
-					//stream_set_blocking($errorStream, true);
-					//$errorresult = stream_get_contents($errorStream);
-					fclose($resultoutput);
-				}
+						
+					$resultoutput = $sshconnection->exec($cmdline);
+					$result = $resultoutput;
+
+					}
               			
 				// Si non supporté transfert vers erreur
 				if (strstr($result,'not supported by UPS')){
@@ -553,11 +561,11 @@ class Nut_free extends eqLogic {
 			$ups 		= $this->getConfiguration('ups');
 			$equipement 	= $this->getName();
 		
-			if (!$connection = ssh2_connect($ip,$port)) {
+			if (!$ssh = new SSH2($ip,$port)) {
 				log::add('Nut_free', 'error', 'connexion SSH KO pour '.$equipement);
 				$cnx_ssh = 'KO';
 			}else{
-				if (!ssh2_auth_password($connection,$user,$pass)){
+				if (!$ssh->login($user, $pass)){	
 				log::add('Nut_free', 'error', 'Authentification SSH KO pour '.$equipement);
 				$cnx_ssh = 'KO';
 				}
