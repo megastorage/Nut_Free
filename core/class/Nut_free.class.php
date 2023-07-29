@@ -396,7 +396,7 @@ class Nut_free extends eqLogic {
 					log::add('Nut_free', 'debug', '			Authentification SSH OK pour ' . $equipement );
 					$upscmd = "upsc -l 2>&1 | grep -v '^Init SSL'";
 					//$ups_output = ssh2_exec($sshconnection, $upscmd);
-					$ups_output = echo sshconnection->exec($upscmd);  
+					$ups_output = $sshconnection->exec($upscmd);  
 					stream_set_blocking($ups_output, true);
 					$ups_auto = stream_get_contents($ups_output);
 					fclose($ups_output); 
@@ -441,7 +441,7 @@ class Nut_free extends eqLogic {
 					$cmdline = "upsc ".$ups." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					
 					//$resultoutput = ssh2_exec($sshconnection, $cmdline); 
-					$resultoutput = echo sshconnection->exec($cmdline); 
+					$resultoutput = $sshconnection->exec($cmdline); 
 					stream_set_blocking($resultoutput, true);
 					$result =stream_get_contents($resultoutput);
 					
