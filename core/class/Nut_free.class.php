@@ -387,11 +387,11 @@ class Nut_free extends eqLogic {
 			}else{
 				log::add('Nut_free', 'debug', '			Liaison ok: ' . $equipement );
 				//if (!ssh2_auth_password($sshconnection,$user,$pass)){
-				if (!sshconnection->login('username', 'password');){
+				if (!$sshconnection->login('username', 'password')){
 				log::add('Nut_free', 'error', 'Authentification SSH KO pour ' . $equipement );
 				log::add('Nut_free', 'debug', 'Authentification SSH KO pour ' . $equipement );
 				$cnx_ssh = 'KO';
-			
+				}
 				}else{
 					log::add('Nut_free', 'debug', '			Authentification SSH OK pour ' . $equipement );
 					$upscmd = "upsc -l 2>&1 | grep -v '^Init SSL'";
@@ -562,7 +562,7 @@ class Nut_free extends eqLogic {
 				$cnx_ssh = 'KO';
 			}else{
 				//if (!ssh2_auth_password($connection,$user,$pass)){	
-				if (!$ssh->login('username', 'password');){	
+				if (!$ssh->login('username', 'password')){	
 				log::add('Nut_free', 'error', 'Authentification SSH KO pour '.$equipement);
 				$cnx_ssh = 'KO';
 				}
