@@ -2,6 +2,7 @@
 if (!isConnect('admin')) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
+
 $plugin = plugin::byId('Nut_free');
 sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
@@ -22,7 +23,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<span>{{Configuration}}</span>
 			</div>
 		</div>
-		<legend><i class="icon meteo-soleil"></i> {{Mes Nut_free}}</legend>
+		<legend><i class="icon meteo-soleil"></i> {{Liste des serveurs Nut}}</legend>
 		<input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
 		<div class="eqLogicThumbnailContainer">
 			<?php
@@ -58,7 +59,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						<fieldset>
 							<legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}</legend>
 						<div class="form-group">
-							<label class="col-md-4 control-label">{{Nom de l'équipement Nut_free}}</label>
+							<label class="col-md-4 control-label">{{Nom de l'onduleur ou serveur Nut}}</label>
 							<div class="col-md-8">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
 								<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement Nut_free}}"/>

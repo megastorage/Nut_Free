@@ -22,13 +22,13 @@
 				
 				$('#iconUPS_line#id#').append('<i title="Sur secteur" class="techno techno-plug2 tooltips" style="font-size : 1.1em;color: #00FF00;" ></i>');
 			} 
-			else if ('#ups_line#'.search('DISCHRG')>-1) {
+			else if (('#ups_line#' == 'OB DISCHRG')||('#ups_line#' == 'OB')||('#ups_line#'.search('OB')>-1)) {
 				
 				$('#iconUPS_line#id#').append('<i title="Sur batterie " class="techno techno-low2 tooltips" style="font-size : 1.1em;color: #FEB95E;" ></i>');
 			} 
 			
 			else {
-			$('#iconUPS_line#id#').append('<i title="Nut: pas de reponses" class="fa fa-times tooltips" style="font-size : 1.1em;color: #FF0000;" ></i>');
+			$('#iconUPS_line#id#').append('<i title="Nut: pas de reponse" class="fa fa-times tooltips" style="font-size : 1.1em;color: #FF0000;" ></i>');
 			}
 			
 		</script>        
