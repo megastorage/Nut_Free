@@ -17,8 +17,6 @@
  */
 
 /* * ***************************Includes********************************* */
-//namespace Composer\Autoload;
-
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 
@@ -28,23 +26,24 @@ include('Crypt/RSA.php');
 include('autoload.php');
 
 use phpseclib\Net\SSH2;
-//echo('if you are reading this, phpseclib has been included');
 
 class Nut_free extends eqLogic {
 
 	public static $_infosMap = array(
-		//on cree un tableau contenant la liste des infos a traiter 
-		//chaque info a un sous tableau avec les parametres 
+		// on cree un tableau contenant la liste des infos a traiter 
+		// chaque info a un sous tableau avec les parametres 
 		// dans postSave() il faut le parcourir pour creer les cmd
-// 		array(
-// 			'name' =>'Nom de l\'equipement infol'
-// 			'logicalId'=>'Id de l\'quipement',
-// 			'type'=>'info', //on peu ne  pas specifie cette valeur et alors dans la boucle mettre celle par default
-// 			'subType'=>'string', //idem
-// 			'order' => 1, // ici on pourrai utiliser l'index du tableau et l'ordre serait le meme que ce tableau
-// 			'template_dashboard'=> 'line'
-//			'cmd' => 'ups.status', //commande a executer
-// 		),
+		// 		array(
+		// 			'name' =>'Nom de l\'equipement infol'
+		// 			'logicalId'=>'Id de l\'quipement',
+		// 			'type'=>'info', //on peu ne  pas specifie cette valeur et alors dans la boucle mettre celle par default
+		// 			'subType'=>'string', //idem
+		// 			'order' => 1, // ici on pourrai utiliser l'index du tableau et l'ordre serait le meme que ce tableau
+		// 			'template_dashboard'=> 'line'
+		//			'cmd' => 'ups.status', //commande a executer
+		//			'order' => ordre d'affichage de la commande dans l equipement
+		//			'enabled' => pour usage futur si on a besoin de toggler l'une ou l'autre commande
+		// 		),
 	
 		array(
 			'name' =>'Marque_Model',
@@ -52,146 +51,194 @@ class Nut_free extends eqLogic {
 			'template_dashboard'=> 'line',
 			'subtype'=>'string',
 			'cmd'=>'device.mfr',
+			'order' => '1',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Model',
 			'logicalId'=>'Model',
 			'subtype'=>'string',
 			'cmd'=>'device.model',
+			'order' => '2',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Serial',
 			'logicalId'=>'ups_serial',
 			'cmd' => 'ups.serial',
 			'subtype'=>'string',
+			'order' => '3',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'UPS MODE',
 			'logicalId'=>'ups_line',
 			'cmd' => 'ups.status',
 			'subtype'=>'string',
+			'order' => '4',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Tension en entrée',
 			'logicalId'=>'input_volt',
 			'cmd'=>'input.voltage',
 			'unite'=>'V',
+			'order' => '5',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Fréquence en entrée',
 			'logicalId'=>'input_freq',
 			'cmd'=>'input.frequency',
 			'unite'=>'Hz',
+			'order' => '6',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Tension en sortie',
 			'logicalId'=>'output_volt',
 			'cmd'=>'output.voltage',
 			'unite'=>'V',
+			'order' => '7',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Fréquence en sortie',
 			'logicalId'=>'output_freq',
 			'cmd'=>'output.frequency',
 			'unite'=>'Hz',
+			'order' => '8',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Puissance en sortie',
 			'logicalId'=>'output_power',
 			'cmd'=>'ups.power',
 			'unite'=>'VA',
+			'order' => '9',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Puissance en sortie réel',
 			'logicalId'=>'output_real_power',
 			'cmd'=>'ups.realpower',
 			'unite'=>'W',
+			'order' => '10',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Niveau de charge batterie',
 			'logicalId'=>'batt_charge',
 			'cmd'=>'battery.charge',
 			'unite'=>'%',
+			'order' => '11',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Tension de la batterie',
 			'logicalId'=>'batt_volt',
 			'cmd'=>'battery.voltage',
 			'unite'=>'V',
+			'order' => '12',
+			'enabled' => 'true',
 		),
 		array(
 		  	'name'      => 'Température de la batterie',
 		  	'logicalId' => 'batt_temp',
 		  	'cmd'       => 'battery.temperature',
 		  	'unite'     => '°C',
+			'order' => '13',
+			'enabled' => 'true',
 		),
 		array(
 			'name'      => 'Température ups',
 			'logicalId' => 'ups_temp',
 			'cmd'       => 'ups.temperature',
 			'unite'     => '°C',
+			'order' => '14',
+			'enabled' => 'true',
 	  ),
 		array(
 			'name' =>'Charge onduleur',
 			'logicalId'=>'ups_load',
 			'cmd'=>'ups.load',
 			'unite'=>'%',
+			'order' => '15',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Temps restant sur batterie en s',
 			'logicalId'=>'batt_runtime',
 			'cmd'=>'battery.runtime',
 			'unite'=>'s',
+			'order' => '16',
+			'enabled' => 'true',
 		),
      		 array(
 			'name' =>'Temps restant sur batterie en min',
 			'logicalId'=>'batt_runtime_min',
 			'cmd'=>'battery.runtime',
 			'unite'=>'min',
+			'order' => '17',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Temps restant avant arrêt en s',
 			'logicalId'=>'timer_shutdown',
 			'cmd'=>'ups.timer.shutdown',
 			'unite'=>'s',
+			'order' => '18',
+			'enabled' => 'true',
 		),
       		array(
 			'name' =>'Temps restant avant arrêt en min',
 			'logicalId'=>'timer_shutdown_min',
 			'cmd'=>'ups.timer.shutdown',
 			'unite'=>'min',
+			'order' => '19',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Beeper',
 			'logicalId'=>'beeper_stat',
 			'subtype'=>'string',
 			'cmd'=>'ups.beeper.status',
+			'order' => '20',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'SSH OPTION',
 			'logicalId'=>'ssh_op',
+			'order' => '21',
+			'enabled' => 'true',
 		),
 		array(
 			'name' =>'Statut cnx SSH Scénario',
 			'logicalId'=>'cnx_ssh',
 			'subtype'=>'string',
+			'order' => '22',
+			'enabled' => 'true',
 		),
 	);
 
     public static function cron() {
 		foreach (eqLogic::byType('Nut_free') as $Nut_free) {
+			//Rafraichissement des valeurs pour chaque equipement
 			$Nut_free->getInformations();
-			$mc = cache::byKey('Nut_freeWidgetmobile' . $Nut_free->getId());
-			$mc->remove();
-			$mc = cache::byKey('Nut_freeWidgetdashboard' . $Nut_free->getId());
-			$mc->remove();
+
+			//Nettoyage du cache
+			$cacheMobile = cache::byKey('Nut_freeWidgetmobile' . $Nut_free->getId());
+			$cacheWidget = cache::byKey('Nut_freeWidgetdashboard' . $Nut_free->getId());
+			$cacheMobile->remove();
+			$cacheWidget->remove();
+
+			//Rafraichissement du UI
 			$Nut_free->toHtml('mobile');
 			$Nut_free->toHtml('dashboard');
 			$Nut_free->refreshWidget();
 		}
 	}
 
-	
 	public static function dependancy_info() {
 		$return = array();
 		$return['log'] = 'Nut_free_update';
@@ -209,22 +256,34 @@ class Nut_free extends eqLogic {
 	}
 
 	public static function dependancy_install() {
+		//Si installation deja en cours, sortie de fonction
 		if (file_exists('/tmp/compilation_Nut_free_in_progress')) {
 			return;
 		}
+
+		//Nettoyage du log
 		log::remove('Nut_free_update');
 		$cmd = 'sudo /bin/bash ' . dirname(__FILE__) . '/../../ressources/install.sh';
+
+		//Redirection de la ligne de commande d installation vers le fichier log
 		$cmd .= ' >> ' . log::getPathToLog('Nut_free_update') . ' 2>&1 &';
+
+		//Installation des dependences
 		exec($cmd);
 	}	
 
-	public function postSave() {
-				
+	public function postSave() {				
+		//Boucler sur le tableau contenant les equipements
+		//La variable $idx représente l'index de l equipement en base 0
+		//La variable $info qui lui est associée est un tableau contenant les valeurs des commandes de cet equipement
+
 		$idx = 0;
-		//parcours du tableau $idx contient l'index commencant a 0 et $info contien le sous tableau de  parametres l'info
+
 		foreach(self::$_infosMap as $idx=>$info)
 		{
-			$Nut_freeCmd = $this->getCmd(null, $info['logicalId']);//on recupere nos valeur
+			//Recuperation des informations sur base du logicalId pour chaque equipement
+			$Nut_freeCmd = $this->getCmd(null, $info['logicalId']);
+			
 			if (!is_object($Nut_freeCmd)) {
 				$Nut_freeCmd = new Nut_freeCmd();
 				$Nut_freeCmd->setLogicalId( $info['logicalId']);
@@ -232,47 +291,32 @@ class Nut_free extends eqLogic {
 					if(isset($info['unite'])){
 						$Nut_freeCmd->setUnite($info['unite']);
 				}
-				$Nut_freeCmd->setOrder($idx+1); //+1 car $idx commence a 0
-					
-				if(isset($info['template_dashboard'])) //on verifi si on a specifier une template, si oui on l'affecte, on peu creer une autre cle $info['template_mobile'] si bessoin
-					$Nut_freeCmd->setTemplate('dashboard', $info['template_dashboard']);
-					
+
+				$Nut_freeCmd->setOrder($info['order']);
 				
+				//Assignation du template si defini
+				if(isset($info['template_dashboard'])) 
+					$Nut_freeCmd->setTemplate('dashboard', $info['template_dashboard']);		
 			}
 			
-			$Nut_freeCmd->setType($params['type'] ?: 'info'); //ici comparaison unitaire, si le parametre est specifiÃ© on l'utilise sinon on met notre default
+			$Nut_freeCmd->setType($params['type'] ?: 'info');
 			
-				//$Nut_freeCmd->setSubType($params['subtype'] ?: 'string');
-			if(isset($info['subtype'])){ //on verifi si on a specifier une template, si oui on l'affecte, on peu creer une autre cle $info['template_mobile'] si bessoin
+			if(isset($info['subtype'])){
 					$Nut_freeCmd->setSubType($info['subtype']);
 			}else{
 				$Nut_freeCmd->setSubType('numeric', $info['subtype']);
 			}
 			
-			
 			if(isset($info['isVisible']))
 			$Nut_freeCmd->setIsVisible($params['isVisible']);
-			$Nut_freeCmd->setEqLogic_id($this->getId());
-			//sur le meme model tu peux ajouter d'autres parametre qu'il faudrait changer par info
-			
+			$Nut_freeCmd->setEqLogic_id($this->getId());	
 			$Nut_freeCmd->save();
 		}
-			$this->getInformations();
+
+		//Rafraichir immediatement les informations apres la sauvegarde de l equipement
+		$this->getInformations();
 	}
 	
-/*
-	public static $_widgetPossibility = array('custom' => array(
-      'visibility' => true,
-      'displayName' => true,
-      'displayObjectName' => true,
-      'optionalParameters' => false,
-      'background-color' => true,
-      'text-color' => true,
-      'border' => true,
-      'border-radius' => true,
-      'background-opacity' => true,
-	));
-*/
  	public function toHtml($_version = 'dashboard')	{
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
@@ -289,7 +333,7 @@ class Nut_free extends eqLogic {
 			$replace['#'.$info['logicalId'].'id#'] = is_object($cmd) ? $cmd->getId() : '';
 			$replace['#'.$info['logicalId'].'_display#'] = (is_object($cmd) && $cmd->getIsVisible()) ? '#'.$info['logicalId'].'_display#' : "none";
 		}
-		////////////////////////////////////////////////////////////////////
+
 		foreach ($this->getCmd(null, null, true) as $cmd) {
 			if (isset($replace['#refresh_id#']) && $cmd->getId() == $replace['#refresh_id#']) {
 				continue;
@@ -307,162 +351,119 @@ class Nut_free extends eqLogic {
 			}
 		}
 		
-		
-		///////////////////////////////////////////////////////////////////
-		/*
-		/////////////////////////////////////////////////////////////
-		//('action')
-		foreach ($this->getCmd('action') as $cmd) {
-			$replace['#cmd_' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-		}
-		////////////////////////////////////////////////////////////////
-		*/
 		$html = template_replace($replace, getTemplate('core', $_version, 'Nut_free','Nut_free'));
-		//cache::set('Nut_freeWidget' . $_version . $this->getId(), $html, 0);
 		
 		return $html;
 	}
-	/*
-	public function toHtml($_version = 'dashboard') {
-		$replace = $this->preToHtml($_version);
-		if (!is_array($replace)) {
-			return $replace;
-		}
-		$_version = jeedom::versionAlias($_version);
-		$cmd_html = '';
-		$br_before = 0;
-		foreach ($this->getCmd(null, null, true) as $cmd) {
-			if (isset($replace['#refresh_id#']) && $cmd->getId() == $replace['#refresh_id#']) {
-				continue;
-			}
-			if ($br_before == 0 && $cmd->getDisplay('forceReturnLineBefore', 0) == 1) {
-				$cmd_html .= '<br/>';
-			}
-			$cmd_html .= $cmd->toHtml($_version, '', $replace['#cmd-background-color#']);
-			$br_before = 0;
-			if ($cmd->getDisplay('forceReturnLineAfter', 0) == 1) {
-				$cmd_html .= '<br/>';
-				$br_before = 1;
-			}
-		}
-		$replace['#cmd#'] = $cmd_html;
-		return template_replace($replace, getTemplate('core', $_version, 'worxLandroid', 'worxLandroid'));
-	}
-	*/
-   public function getInformations() {
 
-		//ici tu pourrais sortir direcetement si l'eqp n'est pas actif -> 
+    public function getInformations() {
+	    //Si l equipement n est pas actif, sortie de fonction, inutile de continuer le traitement
 		if (!$this->getIsEnable()) return;
-		
-		if ($this->getIsEnable()){ 
-			$ip = $this->getConfiguration('addressip');
-			$UPS_auto_select = $this->getConfiguration('UPS_auto_select');
-			$ups = $this->getConfiguration('UPS');
-			$ssh_op = $this->getConfiguration('SSH_select');
-			$equipement = $this->getName();
-			$ups_debug = $this->getConfiguration('UPS');		
-		}
-		
-		//initialisation du mode deporter ou pass
-		$cnx_ssh = 'KO';
-		$Not_Online = 0;
-	   	log::add('Nut_free', 'debug',' -----------------------------------------------------' );
-	   	log::add('Nut_free', 'debug','			Debut des logs' );
-		if ($ssh_op == '0')
-		{
-			log::add('Nut_free', 'debug','			Connexion Non SSH' );
-			$upscmd="upsc -l ".$ip." 2>&1 | grep -v '^Init SSL'";
-			$ups_auto=exec ($upscmd);
-			
-			if (($ups=='')&&($ssh_op == '0')){
-			log::add('Nut_free', 'debug','			Utilisation UPS Auto' );
-				$ups = $ups_auto;
-				
-				}else{
-					log::add('Nut_free', 'debug','			Utilisation Manuel:'. $ups);}
-			
-			
-			$cnx_ssh = 'OK';
-		}elseif ($ssh_op == '1'){
-			$user = $this->getConfiguration('user');
-			$pass = $this->getConfiguration('password');
-			$port = $this->getConfiguration('portssh');
-			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
-			log::add('Nut_free', 'debug','			Connexion SSH' );
-			
-			if (!$sshconnection = new SSH2($ip,$port)){
-				log::add('Nut_free', 'error', '			connexion SSH KO pour ' . $equipement );
-				log::add('Nut_free', 'debug', 'connexion SSH KO pour ' . $equipement );
-				$cnx_ssh = 'KO';
-			}else{
-				log::add('Nut_free', 'debug', '			Liaison ok: ' . $equipement );
-		
-				if (!$sshconnection->login($user, $pass)){
-				//Erreur Authentificaton
-				log::add('Nut_free', 'error', 'Authentification SSH KO pour ' . $equipement );
-				log::add('Nut_free', 'debug', 'Authentification SSH KO pour ' . $equipement );
-				$cnx_ssh = 'KO';
-				
-				}else{
 
-					log::add('Nut_free', 'debug', '			Authentification SSH OK pour ' . $equipement );
-					$upscmd = "upsc -l 2>&1 | grep -v '^Init SSL'";
-					
-					$ups_auto = $sshconnection->exec($upscmd); 
-
-					//suppression du retour chariot
-					$ups_auto = substr($ups_auto, 0, -1);
-					
-					if ($ups==''){
-						$ups = $ups_auto;
-					}
-					$cnx_ssh = 'OK';
-				}
-			}
-		}
-		
-		$cmd = $this->getCmd(null,'cnx_ssh');
-		if(is_object($cmd)){
-			$cmd->event($cnx_ssh);
-		}
-		
+		$ip = $this->getConfiguration('addressip');
+		$ups = $this->getConfiguration('UPS');
+		$ssh_op = $this->getConfiguration('SSH_select');
 		$cmd = $this->getCmd(null,'ssh_op');
 		if(is_object($cmd)){
 			$cmd->event($ssh_op);
 		}
-		if($cnx_ssh != 'OK')
-			return false; // on sort car on a pas de connexion
 		
-		// ici il faut boucler sur notre tableau et execuer les commande pour mettre a jour les infos
-		log::add('Nut_free', 'debug',' -----------------------------------------------------' );
+		$equipement = $this->getName();
+		log::add('Nut_free', 'debug','Tentative de connexion sur l equipement ' .$equipement );
+
+		//Connection en fonction de si on a choisi de passer par le ssh ou non
+		// ssh_op = 0 : sans SSH
+		// ssh_op = 1 : avec SSH
+		if ($ssh_op == '0')
+		{
+			log::add('Nut_free', 'debug','Tentative de connexion non SSH' );
+	
+			//Si aucune configuration manuelle pour l UPS on passe en automatique
+			if ($ups==''){
+				$upscmd="upsc -l ".$ip." 2>&1 | grep -v '^Init SSL'";
+				$ups = exec($upscmd);	
+			}
+		}else{
+			$user = $this->getConfiguration('user');
+			$pass = $this->getConfiguration('password');
+			$port = $this->getConfiguration('portssh');
+			$cmd = $this->getCmd(null,'cnx_ssh');
+
+			log::add('Nut_free', 'debug','Tentative de connexion avec SSH');
+			
+			//Verification si la connexion SSH peut etre etablie
+			if (!$sshconnection = new SSH2($ip,$port)){
+				//SSH pas disponible sur l IP et le port indique
+				if(is_object($cmd)){
+					$cmd->event('KO');
+				}
+
+				log::add('Nut_free', 'error', 'Connexion SSH impossible');
+				log::add('Nut_free', 'debug', 'Connexion SSH impossible');
+
+				return false; // Sortie de fonction si on ne sait pas etablir la connexion
+			}else{
+				//Connexion SSH disponible sur l IP et le port indique, reste a s authentifier
+				log::add('Nut_free', 'debug', 'Connexion SSH disponible, authentication en cours ...');
+		
+					if (!$sshconnection->login($user, $pass)){
+						if(is_object($cmd)){
+							$cmd->event('KO');							
+						}
+
+						log::add('Nut_free', 'error', 'Echec d authentification SSH');
+						log::add('Nut_free', 'debug', 'Echec d Authentification SSH');
+
+						return false; //Sortie de fonction car authentification echouee
+					}else{
+						//Authetification reussie
+						//Si aucune configuration manuelle pour l UPS on passe en automatique
+						if ($ups==''){
+							$upscmd = "upsc -l 2>&1 | grep -v '^Init SSL'";					
+							$ups_auto = $sshconnection->exec($upscmd); 
+							$ups = substr($ups_auto, 0, -1);
+						}
+						
+						if(is_object($cmd)){
+							$cmd->event('OK');							
+						}
+
+						log::add('Nut_free', 'debug', 'Authentification SSH reussie');
+					}
+				}	
+		}
+		
+		log::add('Nut_free', 'debug',' --------Debut du rafraichissement des valeurs--------' );
 		foreach(self::$_infosMap as $idx=>$info)
 		{
-			$errorresult="";
-			
-			if(isset($info['cmd'])) //verifie que l'on a une cmd a executer
-			{
-				
+			if(isset($info['cmd']) && ($info['enabled']=='true'))
+			{		
+				//Execution des commandes pour recuperer les infos
 				if ($ssh_op == '0')
 				{
+					//Mode non SSH
 					/* 2>&1 permet de recuperer l'erreur et la traiter */
 					$cmdline = "upsc ".$ups."@".$ip." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
 					$result = exec($cmdline);
 					
 				}else{
-					$cmdline = "upsc ".$ups." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";
-						
+					//Mode SSH
+					$cmdline = "upsc ".$ups." ".$info['cmd']." 2>&1 | grep -v '^Init SSL'";					
 					$resultoutput = $sshconnection->exec($cmdline);
 					$result = $resultoutput;
-
-					}
+				}
               			
-				// Si non supporté transfert vers erreur
+				//Si la commande retourne une erreur la fonctionalite n est pas dispo, on desactive la commande associee dans jeedom
 				if (strstr($result,'not supported by UPS')){
-					$errorresult=$result;
+					$cmd = $this->getCmd(null,$info['logicalId']);
+					$cmd->setIsVisible(0);
+					$cmd->setEqLogic_id($this->getId());
+					$cmd->save();
+					log::add('Nut_free', 'debug', $equipement.' UPS commande non supportee : '.$info['name'].' : '.$result);
+					continue; //On skip la suite pour passer a la commande suivante
 				}
 				
-				/*Gestion des particularitées*/
-				/*Affichage sur une ligne Marque / Model*/
+				//Conversion pour concatener la marque et le modele
 				if ($idx==0){
 					$Marque = $result;
 				}
@@ -470,123 +471,55 @@ class Nut_free extends eqLogic {
 					$result = $Marque.' '.$result;
 				}
 				
-				if($info['logicalId']=='ups_line'){
-
-			    if (stristr($result,'OL')==False){
-						$Not_Online = 1;
-
-					}else{ 
-						$Not_Online = 0;
-
-						}
-			/* Logs*/		
-			  log::add ('Nut_free', 'debug',  $equipement. ' UPS Not Online: '.$Not_Online .' Result: '.$result);
-					}
-					if (($info['logicalId']=='input_volt') & $Not_Online==1){
-						$result = 0;
-						log::add ('Nut_free', 'debug', $equipement. ' UPS Result Modifié: '.$result);
-					}
-              
-             	/*Affiche en minutes*/
-            	if (($info['logicalId']=='batt_runtime_min') ||($info['logicalId']=='timer_shutdown_min')){
-			 //echo gettype($result);
-			settype($result, "float");
-		       // echo $result;
-			$result = (int)($result/60);
-                }
-				/*Log pour debug */
-				if (!strstr($errorresult,'not supported by UPS')){
-					log::add('Nut_free', 'debug', $equipement.' UPS '.$info['name'].' : '. $result);
-				}else{
-					log::add('Nut_free', 'debug', $equipement.' UPS '.$info['name'].' : '.$errorresult);
-					
-					/*Désactivation de la commande si retour d'erreur*/
-					$cmd = $this->getCmd(null,$info['logicalId']);
-					$cmd->setIsVisible(0);
-					$cmd->setEqLogic_id($this->getId());
-					$cmd->save();
+				//Si l UPS n est pas online on force la valeur du voltage d entree a 0
+				if (($info['logicalId']=='input_volt') & (stristr($result,'OL')==False)){
+					$result = 0;
 				}
-				
-				//met a jour l'info ds jeedom
+              
+             	//Calcul du temps restant sur batterie en minutes
+            	if (($info['logicalId']=='batt_runtime_min') ||($info['logicalId']=='timer_shutdown_min')){
+					settype($result, "float");
+					$result = (int)($result/60);
+                }
+
+				//Rafraichir la valeur de la commande dans jeedom via un post event
 				$cmd = $this->getCmd(null,$info['logicalId']);
 				if(is_object($cmd)){
-					$cmd->event($result);
-					
-				}
-				
+					$cmd->event($result);				
+				}				
 			}
-
 		}
-		log::add('Nut_free', 'debug',' -----------------------------------------------------' );
-	
-		
-		/*DEBUG général*/
-		if ($this->getIsEnable()){
-			$conf_ssh= ' ' ;
-			$conf_ups= ' ' ;
-			if($ssh_op == 1){
-				$conf_ssh = " SSH ";
-			}else{
-				$conf_ssh = " Non SSH ";	
-			}
-			if($ups_auto == 1){
-				$conf_ups = " Manuel ";
-			}else{
-				$conf_ups = " Auto ";	
-			}
-			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
-			log::add('Nut_free', 'debug', $equipement.' UPS auto select: ' . $UPS_auto_select );
-			log::add('Nut_free', 'debug', $equipement.' UPS configured: ' . $ups_debug );
-			log::add('Nut_free', 'debug', $equipement.' UPS auto detect: '. $conf_ups. $ups_auto);
-			log::add('Nut_free', 'debug', $equipement.' UPS commande pour auto_detect: '. $upscmd);
-			log::add('Nut_free', 'debug', $equipement.' UPS Connexion type: '. $conf_ssh. $ssh_op) .$cnx_ssh;
-			log::add('Nut_free', 'debug', $equipement.' UPS Commande envoyée: '. $cmdline);
-			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
-			log::add('Nut_free', 'debug','			Fin des logs' );
-			log::add('Nut_free', 'debug',' -----------------------------------------------------' );
-			log::add('Nut_free', 'debug',' ' );
-			
-		}				
-		
+		log::add('Nut_free', 'debug',' ---------Fin du rafrachissement des valeurs----------' );	
 	}
 	
-	public function getCaseAction($paramaction) {
-		
-
-			$ip 		= $this->getConfiguration('addressip');
-			$UPS_auto_select= $this->getConfiguration('UPS_auto_select');
-			$user 		= $this->getConfiguration('user');
-			$pass 		= $this->getConfiguration('password');
-			$port		= $this->getConfiguration('portssh');
-			$ups 		= $this->getConfiguration('ups');
-			$equipement 	= $this->getName();
-		
-			if (!$ssh = new SSH2($ip,$port)) {
-				log::add('Nut_free', 'error', 'connexion SSH KO pour '.$equipement);
-				$cnx_ssh = 'KO';
-			}else{
-				if (!$ssh->login($user, $pass)){	
-				log::add('Nut_free', 'error', 'Authentification SSH KO pour '.$equipement);
-				$cnx_ssh = 'KO';
-				}
+	public function checkConnectivity() {
+		$ip 		= $this->getConfiguration('addressip');
+		$user 		= $this->getConfiguration('user');
+		$pass 		= $this->getConfiguration('password');
+		$port		= $this->getConfiguration('portssh');
+		$equipement = $this->getName();
+	
+		if (!$ssh = new SSH2($ip,$port)) {
+			log::add('Nut_free', 'error', 'connexion SSH KO pour '.$equipement);
+		}else{
+			if (!$ssh->login($user, $pass)){	
+			log::add('Nut_free', 'error', 'Authentification SSH KO pour '.$equipement);
 			}
+		}
 	}
 }
 
 class Nut_freeCmd extends cmd {
-
-
 /*     * *************************Attributs****************************** */
 	public static $_widgetPossibility = array('custom' => false);
 	
 /*     * *********************Methode d'instance************************* */
 	public function execute($_options = null) {
 		$eqLogic = $this->getEqLogic();
-		$paramaction = $this->getLogicalId();
 
 		if ( $this->GetType = "action" ) {
 			$eqLogic->getCmd();
-			$contentCmd = $eqLogic->getCaseAction($paramaction);
+			$eqLogic->checkConnectivity();
 		} else {
             throw new Exception(__('Commande non implémentée actuellement', __FILE__));
 		}
