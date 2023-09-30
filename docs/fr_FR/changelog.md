@@ -1,3 +1,8 @@
+## 0.39 (BETA): ##
+30/09/2023
+Correction d'un bug d'affichage sur le widget du Dashboard quand l'UPS passe en mode batterie
+Reorganisation et optimisation du code
+
 ## 0.38: ##
 30/07/2023 Remplacement de libSSH2 par php-phpseclib
 

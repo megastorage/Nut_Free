@@ -12,7 +12,7 @@
 	"hasOwnDeamon" : false,
 	"maxDependancyInstallTime" : 45,
 	"language" : ["fr_FR"],
-	"changelog" : "https://megastorage.github.io/Nut_Free/fr_FR/changelog.html",
-	"documentation": "https://megastorage.github.io/Nut_Free",
+	"changelog" : "https://github.com/megastorage/Nut_Free/blob/master/docs/fr_FR/changelog.md",
+	"documentation": "https://github.com/megastorage/Nut_Free/blob/master/docs/fr_FR/index.md",
 	"compatibility": ["miniplus","smart","rpi","docker","diy","mobile","v4","atlas"]
 }
